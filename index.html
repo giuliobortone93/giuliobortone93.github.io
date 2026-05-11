@@ -805,19 +805,18 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   align-items: center;
   justify-content: space-between;
   padding: .8rem 2rem;
-  background: rgba(74,106,40,.92);
+  background: transparent;
   transition: background .4s ease, backdrop-filter .4s ease;
-  backdrop-filter: blur(8px);
 }
 .navbar.scrolled {
-  background: rgba(74,106,40,.95);
+  background: rgba(245,240,232,.92);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(245,240,232,.15);
+  border-bottom: 1px solid rgba(184,150,90,.15);
 }
 .nav-logo {
   font-family: 'Pinyon Script', cursive;
   font-size: 1.4rem;
-  color: var(--carta);
+  color: var(--gold);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -831,11 +830,11 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   font-size: .65rem;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: rgba(245,240,232,.85);
+  color: rgba(255,255,255,.85);
   text-decoration: none;
   transition: color .25s;
 }
-.nav-links a:hover { color: var(--carta); }
+.nav-links a:hover { color: var(--gold); }
 
 /* Hamburger mobile */
 .nav-toggle {
@@ -849,7 +848,7 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   display: block;
   width: 22px;
   height: 1.5px;
-  background: var(--carta);
+  background: rgba(100,80,40,.8);
   transition: all .3s ease;
 }
 .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -903,24 +902,24 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 350px;
-  background: linear-gradient(to bottom, 
-    transparent 0%, 
-    rgba(8,4,2,.1) 25%, 
-    rgba(8,4,2,.45) 55%, 
-    rgba(8,4,2,.82) 80%, 
-    rgba(8,4,2,.95) 100%);
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(240,230,210,.1) 30%,
+    rgba(240,230,210,.5) 60%,
+    rgba(240,230,210,.85) 85%,
+    rgba(240,230,210,.97) 100%);
   pointer-events: none;
   z-index: 3;
 }
 @media(max-width: 768px) {
   .hero::after {
     height: 260px;
-    background: linear-gradient(to bottom, 
-      transparent 0%, 
-      rgba(8,4,2,.1) 25%, 
-      rgba(8,4,2,.45) 55%, 
-      rgba(8,4,2,.82) 80%, 
-      rgba(8,4,2,.95) 100%);
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(240,230,210,.1) 30%,
+      rgba(240,230,210,.5) 60%,
+      rgba(240,230,210,.85) 85%,
+      rgba(240,230,210,.97) 100%);
   }
 }
 .split {
@@ -1024,12 +1023,25 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 }
 .timeline::before { background: linear-gradient(to bottom, var(--pea-light), var(--pea)) !important; }
 .map-btn {
-  border-color: var(--pea) !important;
-  color: var(--pea) !important;
+  border: none !important;
+  background: none !important;
+  color: var(--pea-dark) !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: .7rem !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  padding: .3rem 0 !important;
+  border-bottom: 1px solid rgba(74,106,40,.3) !important;
+  border-radius: 0 !important;
+  display: inline-flex !important;
+  gap: .4rem !important;
 }
 .map-btn:hover {
-  background: var(--pea) !important;
-  color: white !important;
+  color: var(--pea) !important;
+  border-bottom-color: var(--pea) !important;
+  background: none !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* NAVETTA */
@@ -1173,9 +1185,128 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .split-text .tag { color: var(--pea-light) !important; }
 }
 
+
+/* ═══ SPLASH SCREEN ═══ */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 35%, #F5E8D0 0%, #E8D5B0 40%, #D4B896 100%);
+  opacity: 1;
+  transition: opacity 1.2s ease;
+}
+#splash.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+#splash.hidden { display: none; }
+
+.splash-names {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(3rem, 10vw, 6rem);
+  color: #8B6914;
+  letter-spacing: .02em;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: splashFadeUp 1.2s .3s ease forwards;
+  text-align: center;
+  padding: 0 1rem;
+}
+.splash-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(.9rem, 2.5vw, 1.3rem);
+  color: #8B6914;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: splashFadeUp 1s .8s ease forwards;
+}
+.splash-divider {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 1.8rem 0;
+  opacity: 0;
+  animation: splashFadeUp 1s 1s ease forwards;
+}
+.splash-divider::before,
+.splash-divider::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: #B8965A;
+}
+.splash-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #B8965A;
+}
+.splash-dot.small { width: 3px; height: 3px; opacity: .6; }
+
+.splash-countdown {
+  display: flex;
+  gap: 2rem;
+  opacity: 0;
+  animation: splashFadeUp 1s 1.2s ease forwards;
+}
+.splash-cd-item {
+  text-align: center;
+}
+.splash-cd-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 400;
+  color: #5C4A1E;
+  letter-spacing: .05em;
+  line-height: 1;
+}
+.splash-cd-num::after {
+  content: '·';
+  color: #B8965A;
+  margin-left: 2px;
+}
+.splash-cd-item:last-child .splash-cd-num::after { content: ''; }
+.splash-cd-lbl {
+  font-family: 'Jost', sans-serif;
+  font-size: .55rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: #8B6914;
+  margin-top: .4rem;
+}
+
+@keyframes splashFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 </style>
 </head>
 <body>
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-names">Giulio &amp; Mariasofia</div>
+  <div class="splash-date">12 Settembre 2026</div>
+  <div class="splash-divider">
+    <div class="splash-dot"></div>
+    <div class="splash-dot small"></div>
+    <div class="splash-dot"></div>
+    <div class="splash-dot small"></div>
+    <div class="splash-dot"></div>
+  </div>
+  <div class="splash-countdown">
+    <div class="splash-cd-item"><div class="splash-cd-num" id="splDays">--</div><div class="splash-cd-lbl">Giorni</div></div>
+    <div class="splash-cd-item"><div class="splash-cd-num" id="splHours">--</div><div class="splash-cd-lbl">Ore</div></div>
+    <div class="splash-cd-item"><div class="splash-cd-num" id="splMins">--</div><div class="splash-cd-lbl">Minuti</div></div>
+    <div class="splash-cd-item"><div class="splash-cd-num" id="splSecs">--</div><div class="splash-cd-lbl">Secondi</div></div>
+  </div>
+</div>
+
 <nav class="navbar" id="navbar">
   <a href="#" class="nav-logo">G &amp; M</a>
   <ul class="nav-links">
@@ -1217,7 +1348,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
     <div class="hero-line"></div>
     <p class="hero-date">12 · Settembre · 2026</p>
   </div>
-  <div class="scroll-hint" onclick="document.querySelector('.split').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">Scorri per scoprire</div>
+  <div class="scroll-hint" onclick="document.querySelector('.split').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">Scorri per confermare la presenza</div>
 </section>
 
 
@@ -1858,6 +1989,37 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+
+// ─── SPLASH SCREEN ───
+(function(){
+  const splash = document.getElementById('splash');
+  const target = new Date('2026-09-12T15:00:00');
+
+  function updateSplash() {
+    const diff = target - new Date();
+    if (diff <= 0) return;
+    document.getElementById('splDays').textContent  = Math.floor(diff / 864e5);
+    document.getElementById('splHours').textContent = Math.floor(diff % 864e5 / 36e5);
+    document.getElementById('splMins').textContent  = Math.floor(diff % 36e5 / 6e4);
+    document.getElementById('splSecs').textContent  = Math.floor(diff % 6e4 / 1e3);
+  }
+  updateSplash();
+  const splashTick = setInterval(updateSplash, 1000);
+
+  // Hide after 8 seconds
+  setTimeout(() => {
+    splash.classList.add('fade-out');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      splash.classList.add('hidden');
+      clearInterval(splashTick);
+    }, 1200);
+  }, 8000);
+
+  // Block scroll while splash is visible
+  document.body.style.overflow = 'hidden';
+})();
 
 </script>
 </body>
