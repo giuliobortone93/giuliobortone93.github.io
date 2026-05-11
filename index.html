@@ -32,7 +32,7 @@ body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--deep);ove
 .hero-date{font-family:'Jost',sans-serif;font-size:clamp(.8rem,1.8vw,1rem);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-top:.8rem;opacity:0;animation:fadeUp .8s .7s ease both}
 .hero-line{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:.8rem auto;opacity:0;animation:fadeUp .8s .6s ease both}
 .scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:4;color:rgba(255,255,255,.5);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bob 2.5s 2s ease-in-out infinite}
-@media(max-width:768px){.scroll-hint{bottom:8rem;}}
+@media(max-width:768px){.scroll-hint{bottom:14rem;}}
 .scroll-hint::after{content:'↓';color:var(--gold);font-size:1rem}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -332,10 +332,15 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 /* The actual filmstrip track */
 .film-track-wrap {
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
+  scrollbar-width: none;
+  cursor: grab;
 }
+.film-track-wrap::-webkit-scrollbar { display: none; }
+.film-track-wrap:active { cursor: grabbing; }
 /* fade edges */
 .film-track-wrap::before,
 .film-track-wrap::after {
@@ -351,10 +356,7 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   align-items: center;
   gap: 0;
   width: max-content;
-  animation: filmScroll 40s linear infinite;
-  cursor: grab;
 }
-.film-track:active { cursor: grabbing; }
 
 @keyframes filmScroll {
   0%   { transform: translateX(0); }
@@ -917,12 +919,21 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 .split {
   position: relative;
 }
+.split::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 180px;
+  background: linear-gradient(to bottom, rgba(8,4,2,.95) 0%, rgba(8,4,2,.5) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 3;
+}
 .split::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 100px;
-  background: linear-gradient(to bottom, transparent, #0a0a0a);
+  height: 180px;
+  background: linear-gradient(to top, rgba(8,4,2,.95) 0%, rgba(8,4,2,.5) 50%, transparent 100%);
   pointer-events: none;
   z-index: 3;
 }
@@ -1439,60 +1450,91 @@ const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targ
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 
-// ─── FILMSTRIP AUTO-SCROLL ───
+// ─── FILMSTRIP AUTO-SCROLL + DRAG ───
 (function(){
   const track = document.getElementById('filmTrack');
   if (!track) return;
-  let resumeTimer = null;
+  const wrap = track.parentElement;
+  let animFrame, scrollPos = 0, isPaused = false, resumeTimer = null;
+  const speed = 0.6; // px per frame
 
-  function pauseAnim() {
-    track.style.animationPlayState = 'paused';
-    clearTimeout(resumeTimer);
+  // Auto-scroll via requestAnimationFrame
+  function autoScroll() {
+    if (!isPaused) {
+      scrollPos += speed;
+      // Loop: when we've scrolled half the track width, reset
+      if (scrollPos >= track.scrollWidth / 2) scrollPos = 0;
+      wrap.scrollLeft = scrollPos;
+    }
+    animFrame = requestAnimationFrame(autoScroll);
   }
-  function resumeAnim(delay) {
+  autoScroll();
+
+  function pause(resumeAfter) {
+    isPaused = true;
     clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(() => {
-      track.style.animationPlayState = 'running';
-    }, delay || 3000);
+    if (resumeAfter) {
+      resumeTimer = setTimeout(() => { isPaused = false; }, resumeAfter);
+    }
   }
 
-  // Click on photo: pause briefly then resume
-  track.querySelectorAll('.film-frame').forEach(frame => {
-    frame.addEventListener('click', () => {
-      pauseAnim();
-      resumeAnim(4000);
-    });
+  // Mouse drag - desktop
+  let isDown = false, startX, startScroll;
+  wrap.addEventListener('mousedown', e => {
+    isDown = true;
+    isPaused = true;
+    clearTimeout(resumeTimer);
+    startX = e.pageX;
+    startScroll = scrollPos;
+    wrap.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  document.addEventListener('mouseup', () => {
+    if (!isDown) return;
+    isDown = false;
+    wrap.style.cursor = 'grab';
+    pause(3000);
+  });
+  document.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const dx = e.pageX - startX;
+    scrollPos = startScroll - dx;
+    if (scrollPos < 0) scrollPos = 0;
+    if (scrollPos >= track.scrollWidth / 2) scrollPos = track.scrollWidth / 2 - 1;
+    wrap.scrollLeft = scrollPos;
   });
 
-  // Touch swipe: pause then auto-resume
-  let startX, startTime, isDragging = false;
-  track.addEventListener('touchstart', e => {
-    pauseAnim();
-    startX = e.touches[0].pageX;
-    startTime = Date.now();
-    isDragging = false;
+  // Touch drag - mobile
+  let touchStartX, touchStartScroll, touchMoved = false;
+  wrap.addEventListener('touchstart', e => {
+    isPaused = true;
+    clearTimeout(resumeTimer);
+    touchStartX = e.touches[0].pageX;
+    touchStartScroll = scrollPos;
+    touchMoved = false;
   }, {passive:true});
-  track.addEventListener('touchmove', e => {
-    isDragging = true;
-    const dx = e.touches[0].pageX - startX;
-    track.style.animationPlayState = 'paused';
-    // Shift the animation offset manually
-    const current = new WebKitCSSMatrix(getComputedStyle(track).transform);
-    track.style.transform = `translateX(${current.m41 + dx * 0.3}px)`;
-    startX = e.touches[0].pageX;
+  wrap.addEventListener('touchmove', e => {
+    const dx = e.touches[0].pageX - touchStartX;
+    if (Math.abs(dx) > 5) touchMoved = true;
+    if (!touchMoved) return;
+    scrollPos = touchStartScroll - dx;
+    if (scrollPos < 0) scrollPos = 0;
+    if (scrollPos >= track.scrollWidth / 2) scrollPos = track.scrollWidth / 2 - 1;
+    wrap.scrollLeft = scrollPos;
   }, {passive:true});
-  track.addEventListener('touchend', () => {
-    if (!isDragging) return;
-    track.style.transform = '';
-    resumeAnim(2500);
+  wrap.addEventListener('touchend', e => {
+    if (!touchMoved) {
+      // It was a tap - find the film-frame and open lightbox
+      const frame = e.target.closest('.film-frame');
+      if (frame) { openLightbox(frame); return; }
+    }
+    pause(3000);
   }, {passive:true});
 
-  function goToFrame(i) {
-    const frameW = 380;
-    wrap.scrollLeft = i * frameW;
-    document.querySelectorAll('.film-dot').forEach((d,j) => d.classList.toggle('active', i===j));
-  }
-  window.goToFrame = goToFrame;
+  // Click on photo
+  track.querySelectorAll('.film-frame').forEach(frame => {
+    frame.addEventListener('click', () => pause(4000));
+  });
 })();
 
 // ─── CUCCARO HOVER ───
