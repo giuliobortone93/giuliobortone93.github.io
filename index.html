@@ -1911,41 +1911,45 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   if (!track) return;
   const wrap = track.parentElement;
 
-  // Use CSS animation for smooth scrolling - JS only for pause/resume
+  // CSS animation for smooth autoplay
+  track.style.animation = 'filmScroll 40s linear infinite';
+
   let isPaused = false;
   let resumeTimer = null;
-  const SPEED_DURATION = '40s';
 
-  // Apply CSS animation
-  track.style.animation = `filmScroll ${SPEED_DURATION} linear infinite`;
-
-  function pause(resumeAfter) {
+  function pause(ms) {
     isPaused = true;
     track.style.animationPlayState = 'paused';
     clearTimeout(resumeTimer);
-    if (resumeAfter) {
-      resumeTimer = setTimeout(resume, resumeAfter);
-    }
+    if (ms) resumeTimer = setTimeout(resume, ms);
   }
   function resume() {
     isPaused = false;
     track.style.animationPlayState = 'running';
   }
 
-  // Mouse drag - desktop
-  let isDown = false, startX, startTranslate = 0;
+  // Click on photo → open lightbox then auto-resume
+  track.querySelectorAll('.film-frame').forEach(frame => {
+    frame.addEventListener('click', () => {
+      openLightbox(frame);
+      pause(4000);
+    });
+  });
+
+  // ─── MOUSE DRAG (desktop) ───
+  let isDown = false, startX = 0, startLeft = 0;
 
   function getTranslateX() {
-    const mat = new DOMMatrix(getComputedStyle(track).transform);
-    return mat.m41;
+    const m = new DOMMatrix(getComputedStyle(track).transform);
+    return m.m41;
   }
 
   wrap.addEventListener('mousedown', e => {
     isDown = true;
     track.style.animationPlayState = 'paused';
     clearTimeout(resumeTimer);
-    startX = e.pageX;
-    startTranslate = getTranslateX();
+    startX = e.clientX;
+    startLeft = getTranslateX();
     wrap.style.cursor = 'grabbing';
     e.preventDefault();
   });
@@ -1953,93 +1957,97 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     if (!isDown) return;
     isDown = false;
     wrap.style.cursor = 'grab';
-    // Sync animation to current position then resume
+    // Sync animation position then resume
     const cur = getTranslateX();
     const half = track.scrollWidth / 2;
-    const pct = Math.abs(cur) / half * 100;
-    track.style.animationDelay = `-${pct / 100 * 40}s`;
-    track.style.animationPlayState = 'running';
-    resumeTimer = setTimeout(() => {}, 0);
+    const progress = Math.abs(cur % half) / half;
+    track.style.animationDelay = `-${progress * 40}s`;
+    track.style.animation = 'none';
+    requestAnimationFrame(() => {
+      track.style.animation = 'filmScroll 40s linear infinite';
+      track.style.animationPlayState = 'running';
+    });
   });
   document.addEventListener('mousemove', e => {
     if (!isDown) return;
     e.preventDefault();
-    const dx = e.pageX - startX;
+    const dx = e.clientX - startX;
     const half = track.scrollWidth / 2;
-    let newX = startTranslate + dx;
+    let newX = startLeft + dx;
     if (newX > 0) newX = 0;
-    if (Math.abs(newX) > half) newX = -half + 1;
+    if (newX < -half) newX = -half;
     track.style.transform = `translateX(${newX}px)`;
   });
 
-  // Touch drag - mobile (smooth with momentum)
-  let touchStartX, touchLastX, touchLastTime, velocity = 0, touchMoved = false;
-  let momentumAnim;
+  // ─── TOUCH (mobile) ───
+  let tStartX = 0, tStartLeft = 0, tLastX = 0, tLastTime = 0;
+  let velocity = 0, touchMoved = false, momentumRaf;
 
   wrap.addEventListener('touchstart', e => {
-    clearTimeout(resumeTimer);
-    cancelAnimationFrame(momentumAnim);
+    cancelAnimationFrame(momentumRaf);
     track.style.animationPlayState = 'paused';
-    touchStartX = e.touches[0].pageX;
-    touchLastX = touchStartX;
-    touchLastTime = Date.now();
+    clearTimeout(resumeTimer);
+    tStartX = e.touches[0].clientX;
+    tStartLeft = getTranslateX();
+    tLastX = tStartX;
+    tLastTime = Date.now();
     velocity = 0;
     touchMoved = false;
-    startTranslate = getTranslateX();
-  }, {passive:true});
+  }, {passive: true});
 
   wrap.addEventListener('touchmove', e => {
     const now = Date.now();
-    const dx = e.touches[0].pageX - touchLastX;
-    velocity = dx / (now - touchLastTime || 1);
-    touchLastX = e.touches[0].pageX;
-    touchLastTime = now;
+    const x = e.touches[0].clientX;
+    const dt = now - tLastTime || 1;
+    velocity = (x - tLastX) / dt;
+    tLastX = x;
+    tLastTime = now;
 
-    const totalDx = e.touches[0].pageX - touchStartX;
-    if (Math.abs(totalDx) > 3) touchMoved = true;
+    const dx = x - tStartX;
+    if (Math.abs(dx) > 4) touchMoved = true;
     if (!touchMoved) return;
 
     const half = track.scrollWidth / 2;
-    let newX = startTranslate + totalDx;
+    let newX = tStartLeft + dx;
     if (newX > 0) newX = 0;
-    if (Math.abs(newX) > half) newX = -half + 1;
+    if (newX < -half) newX = -half;
     track.style.transform = `translateX(${newX}px)`;
-  }, {passive:true});
+  }, {passive: true});
 
   wrap.addEventListener('touchend', e => {
     if (!touchMoved) {
+      // Tap → open lightbox
       const frame = e.target.closest('.film-frame');
-      if (frame) { openLightbox(frame); return; }
+      if (frame) { openLightbox(frame); pause(4000); }
+      return;
     }
-
-    // Momentum scrolling
+    // Momentum
     let pos = getTranslateX();
+    let vel = velocity * 16;
     const half = track.scrollWidth / 2;
+
     function momentum() {
-      velocity *= 0.95;
-      pos += velocity * 16;
+      vel *= 0.92;
+      pos += vel;
       if (pos > 0) pos = 0;
-      if (Math.abs(pos) > half) pos = -(half - 1);
+      if (pos < -half) pos = -half;
       track.style.transform = `translateX(${pos}px)`;
-      if (Math.abs(velocity) > 0.1) {
-        momentumAnim = requestAnimationFrame(momentum);
+      if (Math.abs(vel) > 0.3) {
+        momentumRaf = requestAnimationFrame(momentum);
       } else {
-        // Resume CSS animation from current position
-        const pct = Math.abs(pos) / half;
+        // Sync and resume
+        const progress = Math.abs(pos % half) / half;
         track.style.transform = '';
-        track.style.animationDelay = `-${pct * 40}s`;
-        track.style.animationPlayState = 'running';
+        track.style.animationDelay = `-${progress * 40}s`;
+        track.style.animation = 'none';
+        requestAnimationFrame(() => {
+          track.style.animation = 'filmScroll 40s linear infinite';
+          track.style.animationPlayState = 'running';
+        });
       }
     }
-    momentumAnim = requestAnimationFrame(momentum);
-  }, {passive:true});
-
-  // Click on photo
-  track.querySelectorAll('.film-frame').forEach(frame => {
-    frame.addEventListener('click', () => {
-      pause(4000);
-    });
-  });
+    momentumRaf = requestAnimationFrame(momentum);
+  }, {passive: true});
 })();
 
 // ─── CUCCARO HOVER ───
