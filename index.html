@@ -946,6 +946,13 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   background: linear-gradient(to top, #F5F0E8 0%, rgba(245,240,232,.8) 40%, transparent 100%);
   pointer-events: none;
   z-index: 3;
+}
+@media(max-width:768px) {
+  .split::before { height: 100px; background: linear-gradient(to bottom, #F5F0E8 0%, rgba(245,240,232,.5) 50%, transparent 100%); }
+  .split::after { height: 0px; background: none; }
+}
+  pointer-events: none;
+  z-index: 3;
 }  pointer-events: none;
   z-index: 3;
 }
