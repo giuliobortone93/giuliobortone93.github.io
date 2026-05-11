@@ -44,7 +44,7 @@ body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--deep);ove
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 /* PHOTO SPLIT */
-.split{display:grid;grid-template-columns:55% 45%;min-height:85vh;position:relative;background:#F2EADA}
+.split{display:grid;grid-template-columns:55% 45%;min-height:85vh;position:relative;background:#F5F0E8}
 .split-photo{position:relative;overflow:hidden}
 .split-photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;transition:transform 1s ease;display:block}
 .split-photo:hover img{transform:scale(1.04)}
@@ -52,12 +52,12 @@ body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--deep);ove
 .split-caption{position:absolute;bottom:0;left:0;right:0;padding:2.5rem 2rem;background:linear-gradient(to top,rgba(12,8,5,.8),transparent)}
 .split-caption h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.5rem);font-style:italic;color:#fff;font-weight:300}
 .split-caption p{font-size:.8rem;letter-spacing:.12em;color:var(--gold2);margin-top:.4rem}
-.split-text{background:#F2EADA;display:flex;flex-direction:column;justify-content:center;padding:4rem 3.5rem;position:relative;overflow:hidden}
+.split-text{background:#F5F0E8;display:flex;flex-direction:column;justify-content:center;padding:4rem 3.5rem;position:relative;overflow:hidden}
 .split-text::after{content:'♡';position:absolute;font-size:18rem;color:rgba(184,150,90,.04);right:-2rem;bottom:-4rem;line-height:1}
 .split-text .tag{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem}
 .split-text .tag::before{content:'';flex:1;max-width:30px;height:1px;background:var(--gold)}
-.split-text h3{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-style:italic;color:#2C2010;font-weight:300;line-height:1.2;margin-bottom:1.5rem}
-.split-text p{font-size:1rem;line-height:1.9;color:rgba(60,45,20,.75);max-width:380px}
+.split-text h3{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-style:italic;color:var(--pea-dark);font-weight:300;line-height:1.2;margin-bottom:1.5rem}
+.split-text p{font-size:1rem;line-height:1.9;color:rgba(74,106,40,.8);max-width:380px}
 
 /* COUNTDOWN */
 .cdown{background:var(--blush);padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
@@ -302,7 +302,7 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 
 /* ─── FILMSTRIP ─── */
 .film-section {
-  background: #E8E0CC;
+  background: #F5F0E8;
   padding: 5rem 0;
   overflow: hidden;
   position: relative;
@@ -315,8 +315,8 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   z-index: 3;
   pointer-events: none;
 }
-.film-section::before { top: 0;    background: linear-gradient(to bottom, #F2EADA, transparent); }
-.film-section::after  { bottom: 0; background: linear-gradient(to top,    #E8E0CC, transparent); }
+.film-section::before { top: 0;    background: linear-gradient(to bottom, #F5F0E8, transparent); }
+.film-section::after  { bottom: 0; background: linear-gradient(to top,    #F5F0E8, transparent); }
 
 .film-header {
   text-align: center;
@@ -354,8 +354,8 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   position: absolute; top: 0; bottom: 0; width: 120px;
   z-index: 4; pointer-events: none;
 }
-.film-track-wrap::before { left:  0; background: linear-gradient(to right, #E8E0CC, transparent); }
-.film-track-wrap::after  { right: 0; background: linear-gradient(to left,  #E8E0CC, transparent); }
+.film-track-wrap::before { left:  0; background: linear-gradient(to right, #F5F0E8, transparent); }
+.film-track-wrap::after  { right: 0; background: linear-gradient(to left,  #F5F0E8, transparent); }
 
 .film-track {
   display: flex;
@@ -904,11 +904,11 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   height: 350px;
   background: linear-gradient(to bottom,
     transparent 0%,
-    rgba(242,234,218,.05) 20%,
-    rgba(242,234,218,.3) 45%,
-    rgba(242,234,218,.75) 70%,
-    rgba(242,234,218,.96) 90%,
-    #F2EADA 100%);
+    rgba(245,240,232,.05) 20%,
+    rgba(245,240,232,.3) 45%,
+    rgba(245,240,232,.75) 70%,
+    rgba(245,240,232,.96) 90%,
+    #F5F0E8 100%);
   pointer-events: none;
   z-index: 3;
 }
@@ -917,11 +917,11 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
     height: 300px;
     background: linear-gradient(to bottom,
       transparent 0%,
-      rgba(242,234,218,.05) 20%,
-      rgba(242,234,218,.3) 45%,
-      rgba(242,234,218,.75) 70%,
-      rgba(242,234,218,.96) 90%,
-      #F2EADA 100%);
+      rgba(245,240,232,.05) 20%,
+      rgba(245,240,232,.3) 45%,
+      rgba(245,240,232,.75) 70%,
+      rgba(245,240,232,.96) 90%,
+      #F5F0E8 100%);
   }
 }
 .split {
@@ -1178,13 +1178,13 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 
 /* Film section verde */
 .film-header .tag-line { color: var(--gold) !important; }
-.film-header .section-h { color: #2C2010 !important; }
+.film-header .section-h { color: #1A1A1A !important; }
 
 /* Split mobile fix */
 
 @media(max-width:768px) {
-  .split-text h3 { font-size: 1.8rem !important; color: #2C2010 !important; }
-  .split-text p { font-size: .95rem !important; color: rgba(60,45,20,.8) !important; }
+  .split-text h3 { font-size: 1.8rem !important; color: var(--pea-dark) !important; }
+  .split-text p { font-size: .95rem !important; color: rgba(74,106,40,.85) !important; }
   .split-text .tag { color: var(--gold) !important; }
 }
 
@@ -1287,6 +1287,15 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 
 @keyframes splashFadeUp {
   to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Film section font sizes */
+.film-header .tag-line { font-size: 2.8rem !important; }
+.film-header .section-h { font-size: clamp(2.5rem, 5vw, 4rem) !important; }
+@media(max-width:768px) {
+  .film-header .tag-line { font-size: 2.2rem !important; }
+  .film-header .section-h { font-size: 2.2rem !important; }
 }
 
 </style>
@@ -1820,37 +1829,42 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   const track = document.getElementById('filmTrack');
   if (!track) return;
   const wrap = track.parentElement;
-  let animFrame, scrollPos = 0, isPaused = false, resumeTimer = null;
-  const speed = 0.6; // px per frame
 
-  // Auto-scroll via requestAnimationFrame
-  function autoScroll() {
-    if (!isPaused) {
-      scrollPos += speed;
-      // Loop: when we've scrolled half the track width, reset
-      if (scrollPos >= track.scrollWidth / 2) scrollPos = 0;
-      wrap.scrollLeft = scrollPos;
-    }
-    animFrame = requestAnimationFrame(autoScroll);
-  }
-  autoScroll();
+  // Use CSS animation for smooth scrolling - JS only for pause/resume
+  let isPaused = false;
+  let resumeTimer = null;
+  const SPEED_DURATION = '40s';
+
+  // Apply CSS animation
+  track.style.animation = `filmScroll ${SPEED_DURATION} linear infinite`;
 
   function pause(resumeAfter) {
     isPaused = true;
+    track.style.animationPlayState = 'paused';
     clearTimeout(resumeTimer);
     if (resumeAfter) {
-      resumeTimer = setTimeout(() => { isPaused = false; }, resumeAfter);
+      resumeTimer = setTimeout(resume, resumeAfter);
     }
+  }
+  function resume() {
+    isPaused = false;
+    track.style.animationPlayState = 'running';
   }
 
   // Mouse drag - desktop
-  let isDown = false, startX, startScroll;
+  let isDown = false, startX, startTranslate = 0;
+
+  function getTranslateX() {
+    const mat = new DOMMatrix(getComputedStyle(track).transform);
+    return mat.m41;
+  }
+
   wrap.addEventListener('mousedown', e => {
     isDown = true;
-    isPaused = true;
+    track.style.animationPlayState = 'paused';
     clearTimeout(resumeTimer);
     startX = e.pageX;
-    startScroll = scrollPos;
+    startTranslate = getTranslateX();
     wrap.style.cursor = 'grabbing';
     e.preventDefault();
   });
@@ -1858,47 +1872,92 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     if (!isDown) return;
     isDown = false;
     wrap.style.cursor = 'grab';
-    pause(3000);
+    // Sync animation to current position then resume
+    const cur = getTranslateX();
+    const half = track.scrollWidth / 2;
+    const pct = Math.abs(cur) / half * 100;
+    track.style.animationDelay = `-${pct / 100 * 40}s`;
+    track.style.animationPlayState = 'running';
+    resumeTimer = setTimeout(() => {}, 0);
   });
   document.addEventListener('mousemove', e => {
     if (!isDown) return;
+    e.preventDefault();
     const dx = e.pageX - startX;
-    scrollPos = startScroll - dx;
-    if (scrollPos < 0) scrollPos = 0;
-    if (scrollPos >= track.scrollWidth / 2) scrollPos = track.scrollWidth / 2 - 1;
-    wrap.scrollLeft = scrollPos;
+    const half = track.scrollWidth / 2;
+    let newX = startTranslate + dx;
+    if (newX > 0) newX = 0;
+    if (Math.abs(newX) > half) newX = -half + 1;
+    track.style.transform = `translateX(${newX}px)`;
   });
 
-  // Touch drag - mobile
-  let touchStartX, touchStartScroll, touchMoved = false;
+  // Touch drag - mobile (smooth with momentum)
+  let touchStartX, touchLastX, touchLastTime, velocity = 0, touchMoved = false;
+  let momentumAnim;
+
   wrap.addEventListener('touchstart', e => {
-    isPaused = true;
     clearTimeout(resumeTimer);
+    cancelAnimationFrame(momentumAnim);
+    track.style.animationPlayState = 'paused';
     touchStartX = e.touches[0].pageX;
-    touchStartScroll = scrollPos;
+    touchLastX = touchStartX;
+    touchLastTime = Date.now();
+    velocity = 0;
     touchMoved = false;
+    startTranslate = getTranslateX();
   }, {passive:true});
+
   wrap.addEventListener('touchmove', e => {
-    const dx = e.touches[0].pageX - touchStartX;
-    if (Math.abs(dx) > 5) touchMoved = true;
+    const now = Date.now();
+    const dx = e.touches[0].pageX - touchLastX;
+    velocity = dx / (now - touchLastTime || 1);
+    touchLastX = e.touches[0].pageX;
+    touchLastTime = now;
+
+    const totalDx = e.touches[0].pageX - touchStartX;
+    if (Math.abs(totalDx) > 3) touchMoved = true;
     if (!touchMoved) return;
-    scrollPos = touchStartScroll - dx;
-    if (scrollPos < 0) scrollPos = 0;
-    if (scrollPos >= track.scrollWidth / 2) scrollPos = track.scrollWidth / 2 - 1;
-    wrap.scrollLeft = scrollPos;
+
+    const half = track.scrollWidth / 2;
+    let newX = startTranslate + totalDx;
+    if (newX > 0) newX = 0;
+    if (Math.abs(newX) > half) newX = -half + 1;
+    track.style.transform = `translateX(${newX}px)`;
   }, {passive:true});
+
   wrap.addEventListener('touchend', e => {
     if (!touchMoved) {
-      // It was a tap - find the film-frame and open lightbox
       const frame = e.target.closest('.film-frame');
       if (frame) { openLightbox(frame); return; }
     }
-    pause(3000);
+
+    // Momentum scrolling
+    let pos = getTranslateX();
+    const half = track.scrollWidth / 2;
+    function momentum() {
+      velocity *= 0.95;
+      pos += velocity * 16;
+      if (pos > 0) pos = 0;
+      if (Math.abs(pos) > half) pos = -(half - 1);
+      track.style.transform = `translateX(${pos}px)`;
+      if (Math.abs(velocity) > 0.1) {
+        momentumAnim = requestAnimationFrame(momentum);
+      } else {
+        // Resume CSS animation from current position
+        const pct = Math.abs(pos) / half;
+        track.style.transform = '';
+        track.style.animationDelay = `-${pct * 40}s`;
+        track.style.animationPlayState = 'running';
+      }
+    }
+    momentumAnim = requestAnimationFrame(momentum);
   }, {passive:true});
 
   // Click on photo
   track.querySelectorAll('.film-frame').forEach(frame => {
-    frame.addEventListener('click', () => pause(4000));
+    frame.addEventListener('click', () => {
+      pause(4000);
+    });
   });
 })();
 
