@@ -164,16 +164,18 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 /* RESPONSIVE */
 @media(max-width:768px){
   .split{grid-template-columns:1fr;min-height:auto;position:relative}
-  .split-photo{height:100vw;min-height:320px}
-  .split-photo img{object-position:center center}
+  .split-photo{height:115vw;min-height:400px}
+  .split-photo img{object-position:center 30%}
   .split-text{
     position:absolute;
     bottom:0;left:0;right:0;
-    background:linear-gradient(to top, rgba(8,4,2,.88) 0%, rgba(8,4,2,.55) 55%, transparent 100%);
-    padding:3rem 1.5rem 2rem;
+    background:linear-gradient(to top, rgba(245,240,232,1) 0%, rgba(245,240,232,.95) 45%, rgba(245,240,232,.6) 72%, transparent 100%);
+    padding:4rem 1.5rem 2.5rem;
   }
   .split-text::after{display:none}
-  .split-text h3{font-size:1.5rem;margin-bottom:.7rem;color:white}
+  .split-text h3{font-size:2rem;margin-bottom:.8rem;color:var(--pea-dark) !important;}
+  .split-text p{font-size:1rem;line-height:1.75;max-width:100%;color:#1A1A1A !important;}
+  .split-text .tag{margin-bottom:.8rem;color:var(--gold) !important;}
   .split-text p{font-size:.82rem;line-height:1.65;max-width:100%;color:rgba(255,255,255,.7)}
   .split-text .tag{margin-bottom:.8rem}
   .timeline::before{left:22px}
@@ -1199,7 +1201,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at 50% 35%, #F5E8D0 0%, #E8D5B0 40%, #D4B896 100%);
+  background: radial-gradient(ellipse at 50% 35%, #FFFFFF 0%, #F5F0E8 50%, #EDE8DC 100%);
   opacity: 1;
   transition: opacity 1.2s ease;
 }
@@ -1211,8 +1213,8 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 
 .splash-names {
   font-family: 'Pinyon Script', cursive;
-  font-size: clamp(3rem, 10vw, 6rem);
-  color: #8B6914;
+  font-size: clamp(3.5rem, 14vw, 8rem);
+  color: #4A6A28;
   letter-spacing: .02em;
   opacity: 0;
   transform: translateY(20px);
@@ -1222,8 +1224,8 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 }
 .splash-date {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(.9rem, 2.5vw, 1.3rem);
-  color: #8B6914;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: #4A6A28;
   letter-spacing: .35em;
   text-transform: uppercase;
   margin-top: 1rem;
@@ -1243,13 +1245,13 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   content: '';
   width: 60px;
   height: 1px;
-  background: #B8965A;
+  background: #7A9A4A;
 }
 .splash-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #B8965A;
+  background: #7A9A4A;
 }
 .splash-dot.small { width: 3px; height: 3px; opacity: .6; }
 
@@ -1266,13 +1268,13 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 400;
-  color: #5C4A1E;
+  color: #2A4A18;
   letter-spacing: .05em;
   line-height: 1;
 }
 .splash-cd-num::after {
   content: '·';
-  color: #B8965A;
+  color: #7A9A4A;
   margin-left: 2px;
 }
 .splash-cd-item:last-child .splash-cd-num::after { content: ''; }
@@ -1281,7 +1283,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   font-size: .55rem;
   letter-spacing: .25em;
   text-transform: uppercase;
-  color: #8B6914;
+  color: #4A6A28;
   margin-top: .4rem;
 }
 
@@ -1298,12 +1300,64 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .film-header .section-h { font-size: 2.2rem !important; }
 }
 
+
+/* ═══ TESTO NERO E PIÙ GRANDE ═══ */
+
+/* Luoghi - descrizioni */
+.venue-text .venue-desc { color: #1A1A1A !important; font-size: 1.15rem !important; }
+.venue-text .venue-location { color: var(--pea-dark) !important; }
+
+/* Navetta */
+.nc-route { color: #1A1A1A !important; font-size: 1rem !important; }
+.nc-route a { color: var(--pea-dark) !important; }
+
+/* Regalo / IBAN testo */
+.regalo-text { color: #1A1A1A !important; font-size: 1.2rem !important; line-height: 2 !important; }
+.regalo-text p { color: #1A1A1A !important; }
+
+/* Cuccaro testo */
+.cuccaro-text { color: #1A1A1A !important; font-size: 1.2rem !important; line-height: 2 !important; }
+.cuccaro-text p { color: #1A1A1A !important; }
+.cuccaro-text .cuccaro-finale { color: #1A1A1A !important; font-size: 1.35rem !important; }
+
+/* Timeline testo */
+.tl-content p { color: #1A1A1A !important; font-size: 1.05rem !important; }
+.tl-content h4 { color: #1A1A1A !important; }
+
+/* RSVP */
+.rsvp-subtitle { color: #1A1A1A !important; font-size: 1.05rem !important; }
+.rsvp-wrap p { color: #1A1A1A !important; font-size: 1.05rem !important; }
+
+/* IBAN */
+.iban-causale { color: #555 !important; }
+.iban-causale span { color: #333 !important; }
+
+@media(max-width: 768px) {
+  .venue-text .venue-desc { font-size: 1.05rem !important; }
+  .regalo-text { font-size: 1.05rem !important; }
+  .cuccaro-text { font-size: 1.05rem !important; }
+  .tl-content p { font-size: 1rem !important; }
+  .nc-route { font-size: .95rem !important; }
+}
+
+
+.splash-amp {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(2rem, 8vw, 4rem);
+  color: #7A9A4A;
+  opacity: 0;
+  animation: splashFadeUp 1s .6s ease forwards;
+  line-height: 1;
+}
+
 </style>
 </head>
 <body>
 <!-- SPLASH SCREEN -->
 <div id="splash">
-  <div class="splash-names">Giulio &amp; Mariasofia</div>
+  <div class="splash-names">Giulio</div>
+  <div class="splash-amp">&#38;</div>
+  <div class="splash-names">Mariasofia</div>
   <div class="splash-date">12 Settembre 2026</div>
   <div class="splash-divider">
     <div class="splash-dot"></div>
