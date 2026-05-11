@@ -11,6 +11,12 @@
   --gold:#B8965A;--gold2:#E2C07A;--cream:#FAF6EE;--deep:#12100D;
   --olive:#6B7B5E;--blush:#F0E0D0;--rust:#9B4A2A;--sea:#3B7A8C;
   --sand:#D9C4A0;
+  --pea:#7A9A4A;
+  --pea-dark:#4A6A28;
+  --pea-light:#A8C070;
+  --pea-muted:#5A7A34;
+  --carta:#F5F0E8;
+  --carta-dark:#E8E0D0;
 }
 html{scroll-behavior:smooth}
 body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--deep);overflow-x:hidden}
@@ -944,6 +950,216 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   .nav-links { display: none !important; }
 }
 
+
+/* ═══ NUOVA PALETTE — BIANCO CARTA AMALFI & VERDE PISELLO ═══ */
+
+/* COUNTDOWN */
+.cdown {
+  background: var(--carta) !important;
+}
+.cdown .tag-line { color: var(--pea) !important; }
+.cdown .section-h { color: var(--pea-dark) !important; }
+.cd-box {
+  background: white !important;
+  border: 1.5px solid rgba(122,154,74,.25) !important;
+  box-shadow: 0 4px 20px rgba(122,154,74,.1) !important;
+}
+.cd-num { color: var(--pea-dark) !important; }
+.cd-lbl { color: var(--pea-muted) !important; }
+
+/* LUOGHI */
+.places-section {
+  background: white !important;
+}
+.places-section .tag-line { color: var(--pea) !important; }
+.places-section .section-h { color: var(--pea-dark) !important; }
+.places-section .section-sub { color: rgba(74,106,40,.6) !important; }
+.venue-badge {
+  background: rgba(122,154,74,.1) !important;
+  border-color: rgba(122,154,74,.4) !important;
+  color: var(--pea-dark) !important;
+}
+.venue-text h3 { color: var(--pea-dark) !important; }
+.venue-text .venue-location { color: var(--pea) !important; }
+.venue-text .venue-desc { color: rgba(74,106,40,.75) !important; }
+.pill {
+  background: rgba(122,154,74,.08) !important;
+  border-color: rgba(122,154,74,.2) !important;
+  color: var(--pea-dark) !important;
+}
+.venue-label-bar::after {
+  background: linear-gradient(to right, rgba(122,154,74,.5), transparent) !important;
+}
+.venue-divider::before, .venue-divider::after {
+  background: linear-gradient(to right, transparent, rgba(122,154,74,.35), transparent) !important;
+}
+.venue-divider span { color: rgba(74,106,40,.4) !important; }
+.vp img { filter: brightness(.9) !important; }
+.vp:hover img { filter: brightness(1) !important; }
+.vp-tag {
+  background: rgba(245,240,232,.85) !important;
+  border-color: rgba(122,154,74,.4) !important;
+  color: var(--pea-dark) !important;
+}
+
+/* TIMELINE / INFO */
+.info {
+  background: var(--carta) !important;
+}
+.info .tag-line { color: var(--pea) !important; }
+.info .section-h { color: var(--pea-dark) !important; }
+.tl-content {
+  background: white !important;
+  border-color: rgba(122,154,74,.2) !important;
+  box-shadow: 0 2px 15px rgba(122,154,74,.08) !important;
+}
+.tl-content .time { color: var(--pea) !important; }
+.tl-content h4 { color: var(--pea-dark) !important; }
+.tl-content p { color: rgba(74,106,40,.75) !important; }
+.tl-dot {
+  background: white !important;
+  border-color: var(--pea) !important;
+  color: var(--pea-dark) !important;
+}
+.timeline::before { background: linear-gradient(to bottom, var(--pea-light), var(--pea)) !important; }
+.map-btn {
+  border-color: var(--pea) !important;
+  color: var(--pea) !important;
+}
+.map-btn:hover {
+  background: var(--pea) !important;
+  color: white !important;
+}
+
+/* NAVETTA */
+.navetta { background: white !important; }
+.navetta .tag-line { color: var(--pea) !important; }
+.navetta .section-h { color: var(--pea-dark) !important; }
+.nav-card {
+  background: var(--carta) !important;
+  border-color: rgba(122,154,74,.2) !important;
+}
+.nc-time { color: var(--pea) !important; }
+.nc-label { color: var(--pea-dark) !important; }
+.nc-route { color: rgba(74,106,40,.75) !important; }
+
+/* RSVP */
+.rsvp-section { background: var(--carta) !important; }
+.rsvp-section .tag-line { color: var(--pea) !important; }
+.rsvp-section .section-h { color: var(--pea-dark) !important; }
+.rsvp-section .rsvp-subtitle { color: rgba(74,106,40,.8) !important; }
+.rsvp-wrap {
+  background: white !important;
+  border-color: rgba(122,154,74,.2) !important;
+  box-shadow: 0 4px 30px rgba(122,154,74,.1) !important;
+}
+.submit-btn {
+  background: linear-gradient(135deg, var(--pea), var(--pea-dark)) !important;
+  box-shadow: 0 4px 20px rgba(122,154,74,.35) !important;
+}
+.submit-btn:hover {
+  box-shadow: 0 6px 30px rgba(122,154,74,.5) !important;
+  transform: translateY(-2px);
+}
+
+/* REGALO / IBAN */
+.regalo-section { background: white !important; }
+.regalo-section .section-h { color: var(--pea-dark) !important; }
+.regalo-text { color: rgba(74,106,40,.8) !important; }
+.iban-box {
+  background: rgba(122,154,74,.06) !important;
+  border-color: rgba(122,154,74,.35) !important;
+}
+.iban-label { color: var(--pea) !important; }
+.iban-number { color: var(--pea-dark) !important; }
+.iban-copy-btn {
+  border-color: var(--pea) !important;
+  color: var(--pea) !important;
+}
+.iban-copy-btn:hover, .iban-copy-btn.copied {
+  background: var(--pea) !important;
+  color: white !important;
+}
+.iban-causale { color: rgba(74,106,40,.5) !important; }
+.iban-causale span { color: rgba(74,106,40,.75) !important; }
+
+/* CUCCARO */
+.cuccaro-section { background: var(--carta) !important; }
+.cuccaro-badge {
+  background: rgba(122,154,74,.1) !important;
+  border-color: rgba(122,154,74,.3) !important;
+  color: var(--pea-dark) !important;
+}
+.cuccaro-header h2 { color: var(--pea-dark) !important; }
+.cuccaro-header .cuccaro-sub { color: rgba(74,106,40,.4) !important; }
+.cuccaro-text { color: rgba(74,106,40,.8) !important; }
+.cuccaro-text .cuccaro-finale { color: var(--pea-dark) !important; }
+
+/* FOOTER */
+footer {
+  background: var(--pea-dark) !important;
+  border-top-color: rgba(245,240,232,.15) !important;
+}
+footer .foot-names { color: var(--carta) !important; }
+footer .foot-date { color: rgba(245,240,232,.5) !important; }
+
+/* PETALI su sfondo chiaro */
+.petal { opacity: .4; }
+
+
+/* ═══ FONT PIÙ GRANDI DAL RULLINO IN GIÙ ═══ */
+
+/* Countdown */
+.cdown .section-h { font-size: clamp(2.2rem, 4vw, 3.5rem) !important; }
+.cdown .tag-line { font-size: 2.5rem !important; }
+.cd-num { font-size: clamp(3rem, 7vw, 5rem) !important; }
+.cd-lbl { font-size: .85rem !important; letter-spacing: .25em !important; }
+
+/* Luoghi */
+.places-section .section-h { font-size: clamp(2.2rem, 4vw, 3.5rem) !important; }
+.places-section .tag-line { font-size: 2.5rem !important; }
+.venue-text h3 { font-size: clamp(2rem, 3.5vw, 3rem) !important; }
+.venue-text .venue-location { font-size: .9rem !important; }
+.venue-text .venue-desc { font-size: 1.2rem !important; }
+.pill { font-size: .8rem !important; }
+
+/* Timeline */
+.info .section-h { font-size: clamp(2.2rem, 4vw, 3.5rem) !important; }
+.info .tag-line { font-size: 2.5rem !important; }
+.tl-content .time { font-size: .8rem !important; letter-spacing: .2em !important; }
+.tl-content h4 { font-size: 1.3rem !important; }
+.tl-content p { font-size: 1rem !important; }
+
+/* RSVP */
+.rsvp-section .section-h { font-size: clamp(2.2rem, 4vw, 3.5rem) !important; }
+.rsvp-section .tag-line { font-size: 2.5rem !important; }
+.rsvp-subtitle { font-size: 1rem !important; }
+
+/* Regalo IBAN */
+.regalo-section .section-h { font-size: clamp(2.2rem, 4vw, 3.5rem) !important; }
+.regalo-text { font-size: 1.15rem !important; line-height: 1.95 !important; }
+.iban-number { font-size: clamp(1.1rem, 3vw, 1.6rem) !important; }
+.iban-label { font-size: .8rem !important; }
+
+/* Cuccaro */
+.cuccaro-header h2 { font-size: clamp(2.2rem, 5vw, 3.5rem) !important; }
+.cuccaro-text { font-size: 1.15rem !important; line-height: 1.95 !important; }
+.cuccaro-text .cuccaro-finale { font-size: 1.3rem !important; }
+
+/* Film section header */
+.film-header .tag-line { font-size: 2.5rem !important; }
+.film-header .section-h { font-size: clamp(2.2rem, 4vw, 3.5rem) !important; }
+
+@media(max-width: 768px) {
+  .cd-num { font-size: clamp(2.5rem, 12vw, 4rem) !important; }
+  .venue-text h3 { font-size: 1.8rem !important; }
+  .venue-text .venue-desc { font-size: 1.05rem !important; }
+  .tl-content h4 { font-size: 1.15rem !important; }
+  .tl-content p { font-size: .95rem !important; }
+  .regalo-text { font-size: 1.05rem !important; }
+  .cuccaro-text { font-size: 1.05rem !important; }
+}
+
 </style>
 </head>
 <body>
@@ -979,6 +1195,7 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   <div class="hero-grad"></div>
   <div class="hero-inner">
     <p class="eyebrow">Perché i giorni belli si vivono in compagnia</p>
+    <div class="hero-line"></div>
     <h1 class="hero-names">
       Giulio
       <span class="hero-amp">&amp;</span>
@@ -1362,10 +1579,10 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
     <h2 class="section-h">La cassa del viaggiatore</h2>
     <div class="regalo-text">
       <p>Stiamo già litigando sulla destinazione del viaggio di nozze.</p>
-      <p>Lui ha una lista. Una lista vera, con le stelle di priorità. Giappone, Patagonia, Islanda, le Isole Faroe (sì, le Faroe — quel posto dove piove 340 giorni l'anno e l'attrazione principale è una cascata nel vento). Ha menzionato la Mongolia a cavallo. Ha detto "e se andassimo in Antartide?" con gli occhi spalancati di chi sta facendo una proposta seria. In un momento di delirio totale ha anche googolato "voli per la Groenlandia" — la GROENLANDIA.</p>
+      <p>Lui ha una lista. Una lista vera, con le stelle di priorità. Giappone, Patagonia, Islanda, le Isole Faroe (sì, le Faroe, quel posto dove piove 340 giorni l'anno e l'attrazione principale è una cascata nel vento). Ha menzionato la Mongolia a cavallo. Ha detto "e se andassimo in Antartide?" con gli occhi spalancati di chi sta facendo una proposta seria. In un momento di delirio totale ha anche googolato "voli per la Groenlandia", la GROENLANDIA.</p>
       <p>A un certo punto ha tirato fuori "le isole Svalbard". Le isole Svalbard. Dove vivono più orsi polari che esseri umani.</p>
       <p>Lei vuole il mare. Il caldo. Un cocktail. I delfini.</p>
-      <p>Probabilmente, come sempre nella nostra storia, l'avrà vinta la sposa — ma per ora lasciamo che lui ci creda ancora un po'. In fondo, è proprio questo equilibrio tutto suo, tra grandi sogni impossibili e resa incondizionata, che lo rende così irresistibilmente lui.</p>
+      <p>Probabilmente, come sempre nella nostra storia, l'avrà vinta la sposa.... ma per ora lasciamo che lui ci creda ancora un po'. In fondo, è proprio questo equilibrio tutto suo, tra grandi sogni impossibili e resa incondizionata, che lo rende così irresistibilmente lui.</p>
       <p>Se volete contribuire a questa epica e squilibrata battaglia diplomatica, e aiutarci ad arrivare da qualche parte prima che lui prenoti un igloo, potete farlo qui sotto.</p>
       <p>Ogni euro ci avvicina a una spiaggia. O a un orso polare. Dipende da chi vince. 😉</p>
     </div>
@@ -1393,7 +1610,7 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
     <div class="cuccaro-body">
       <div class="cuccaro-text">
         <p>Sì, lo sappiamo. Il sito parla di Pisciotta, la cerimonia è a Pisciotta, le foto sono di Pisciotta.</p>
-        <p>Ma lo sposo è di Cuccaro Vetere. E dopo lunghe e sfiancanti trattative — durate circa quanto il dibattito sul viaggio di nozze — ha strappato questa sezione.</p>
+        <p>Ma lo sposo è di Cuccaro Vetere. E dopo lunghe e sfiancanti trattative, ha strappato questa sezione.</p>
         <p>Cuccaro Vetere: 500 anime, un campanile che si vede da lontano, vicoli di pietra che sanno di estate e di domenica, e una festa patronale che illumina il cielo come se il paese volesse farsi vedere da tutto il Cilento.</p>
         <p>È il posto dove Giulio è nato e cresciuto. Dove ci sono gli affetti più profondi, i ricordi più veri, le persone che lo hanno fatto diventare quello che è.</p>
         <p class="cuccaro-finale">Non è Pisciotta. Ma è casa.</p>
