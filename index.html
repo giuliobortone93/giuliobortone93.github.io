@@ -1389,6 +1389,127 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .nc-route a { color:var(--pea-dark) !important; }
 }
 
+
+/* ═══ CUSTOM FORM RSVP ═══ */
+.rsvp-form { max-width: 580px; margin: 0 auto; }
+.form-group { margin-bottom: 1.8rem; text-align: left; }
+.form-label {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--pea-dark);
+  margin-bottom: .6rem;
+}
+.form-label span { color: #e74c3c; margin-left: 2px; }
+.form-input {
+  width: 100%;
+  padding: .85rem 1.1rem;
+  border: 1.5px solid rgba(122,154,74,.3);
+  border-radius: 10px;
+  background: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: var(--deep);
+  transition: border-color .25s, box-shadow .25s;
+  box-sizing: border-box;
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--pea);
+  box-shadow: 0 0 0 3px rgba(122,154,74,.12);
+}
+.radio-group { display: flex; flex-direction: column; gap: .7rem; }
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .75rem 1.1rem;
+  border: 1.5px solid rgba(122,154,74,.25);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .2s ease;
+  background: white;
+}
+.radio-option:hover { border-color: var(--pea); background: rgba(122,154,74,.04); }
+.radio-option.selected { border-color: var(--pea); background: rgba(122,154,74,.08); }
+.radio-option input[type="radio"] { display: none; }
+.radio-dot {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(122,154,74,.4);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.radio-option.selected .radio-dot {
+  border-color: var(--pea);
+  background: var(--pea);
+}
+.radio-option.selected .radio-dot::after {
+  content: '';
+  width: 6px; height: 6px;
+  background: white;
+  border-radius: 50%;
+}
+.radio-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: var(--deep);
+}
+.form-submit {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--pea), var(--pea-dark));
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-family: 'Jost', sans-serif;
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .3s ease;
+  margin-top: .5rem;
+}
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(122,154,74,.4);
+}
+.form-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+.form-success {
+  text-align: center;
+  padding: 3rem 2rem;
+  display: none;
+}
+.form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.form-success h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--pea-dark);
+  margin-bottom: .8rem;
+}
+.form-success p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: rgba(18,16,13,.6);
+  font-style: italic;
+}
+.form-error {
+  background: rgba(231,76,60,.08);
+  border: 1px solid rgba(231,76,60,.3);
+  border-radius: 10px;
+  padding: .8rem 1.1rem;
+  font-family: 'Jost', sans-serif;
+  font-size: .8rem;
+  color: #c0392b;
+  margin-bottom: 1rem;
+  display: none;
+}
+
 </style>
 </head>
 <body>
@@ -1797,23 +1918,72 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 
 
 <section class="rsvp-section" id="rsvp">
-  <div class="reveal">
+  <div class="reveal" style="text-align:center;margin-bottom:3rem;">
     <p class="tag-line">Faccelo sapere!</p>
     <h2 class="section-h">Conferma la tua presenza</h2>
     <p class="rsvp-subtitle">Ti chiediamo di rispondere entro il <strong>30 Giugno 2026</strong> per aiutarci a organizzare al meglio ✨</p>
   </div>
-  <div class="rsvp-wrap reveal" style="text-align:center">
-    <p style="font-size:.95rem;color:#888;line-height:1.8;margin-bottom:2rem">
-      Ci vorrà meno di un minuto! 😊
-    </p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfA7bejiJ3BKgnY60Kt2EOcYV2gW8-K0RYdcFEhHKGfdCuL2Q/viewform"
-       target="_blank" rel="noopener" class="submit-btn"
-       style="display:inline-block;text-decoration:none;font-size:1rem">
-      💌 &nbsp; Conferma la tua presenza
-    </a>
-    <p style="font-size:.75rem;color:#bbb;margin-top:1.5rem;letter-spacing:.05em">
-      Si aprirà Google Forms — semplice e veloce
-    </p>
+  <div class="rsvp-wrap reveal">
+    <div id="formError" class="form-error">Per favore compila tutti i campi obbligatori.</div>
+    <form class="rsvp-form" id="rsvpForm" onsubmit="submitRsvp(event)">
+
+      <div class="form-group">
+        <label class="form-label">Nome e Cognome <span>*</span></label>
+        <input type="text" class="form-input" id="f_nome" placeholder="Es. Mario Rossi" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Parteciperai? <span>*</span></label>
+        <div class="radio-group">
+          <label class="radio-option" onclick="selectRadio(this,'f_partecipa')">
+            <input type="radio" name="partecipa" value="SI">
+            <div class="radio-dot"></div>
+            <span class="radio-label">Sì, ci sarò! 🎉</span>
+          </label>
+          <label class="radio-option" onclick="selectRadio(this,'f_partecipa')">
+            <input type="radio" name="partecipa" value="NO">
+            <div class="radio-dot"></div>
+            <span class="radio-label">Purtroppo no 😢</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Numero persone <span>*</span></label>
+        <input type="number" class="form-input" id="f_persone" min="1" max="10" placeholder="Es. 2" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Utilizzerai il transfer? <span>*</span></label>
+        <div class="radio-group">
+          <label class="radio-option" onclick="selectRadio(this,'f_navetta')">
+            <input type="radio" name="navetta" value="Si, prendo la navetta">
+            <div class="radio-dot"></div>
+            <span class="radio-label">Sì, prendo il transfer 🚌</span>
+          </label>
+          <label class="radio-option" onclick="selectRadio(this,'f_navetta')">
+            <input type="radio" name="navetta" value="No, ho un'auto">
+            <div class="radio-dot"></div>
+            <span class="radio-label">No, ho un'auto 🚗</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Hai intolleranze alimentari?</label>
+        <input type="text" class="form-input" id="f_intolleranze" placeholder="Es. Lattosio, glutine... (lascia vuoto se nessuna)">
+      </div>
+
+      <button type="submit" class="form-submit" id="submitBtn">
+        💌 &nbsp; Conferma la tua presenza
+      </button>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <span class="success-icon">🥂</span>
+      <h3>Grazie mille!</h3>
+      <p>La tua conferma è stata ricevuta.<br>Non vediamo l'ora di festeggiare con te!</p>
+    </div>
   </div>
 </section>
 
@@ -2183,6 +2353,56 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   // Block scroll while splash is visible
   document.body.style.overflow = 'hidden';
 })();
+
+
+// ─── RSVP FORM ───
+function selectRadio(label, groupId) {
+  const name = label.querySelector('input[type="radio"]').name;
+  document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+    r.closest('.radio-option').classList.remove('selected');
+  });
+  label.classList.add('selected');
+  label.querySelector('input[type="radio"]').checked = true;
+}
+
+function submitRsvp(e) {
+  e.preventDefault();
+  const nome = document.getElementById('f_nome').value.trim();
+  const partecipa = document.querySelector('input[name="partecipa"]:checked');
+  const persone = document.getElementById('f_persone').value.trim();
+  const navetta = document.querySelector('input[name="navetta"]:checked');
+  const intolleranze = document.getElementById('f_intolleranze').value.trim();
+
+  const errEl = document.getElementById('formError');
+  if (!nome || !partecipa || !persone || !navetta) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Invio in corso...';
+
+  const formData = new FormData();
+  formData.append('entry.1859279917', nome);
+  formData.append('entry.1454662607', partecipa.value);
+  formData.append('entry.1194144144', persone);
+  formData.append('entry.1017981263', navetta.value);
+  formData.append('entry.1211602516', intolleranze || 'Nessuna');
+
+  fetch('https://docs.google.com/forms/d/e/1FAIpQLSfA7bejiJ3BKgnY60Kt2EOcYV2gW8-K0RYdcFEhHKGfdCuL2Q/formResponse', {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  }).then(() => {
+    document.getElementById('rsvpForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }).catch(() => {
+    document.getElementById('rsvpForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+}
 
 </script>
 </body>
