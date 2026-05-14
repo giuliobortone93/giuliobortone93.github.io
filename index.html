@@ -1317,7 +1317,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 .venue-text .venue-desc { color: #1A1A1A !important; font-size: 1.15rem !important; }
 .venue-text .venue-location { color: var(--pea-dark) !important; }
 
-/* Navetta */
+/* Transfer */
 .nc-route { color: #1A1A1A !important; font-size: 1rem !important; }
 .nc-route a { color: var(--pea-dark) !important; }
 
@@ -1637,6 +1637,46 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 }
 </style>
 
+
+<style>
+/* ═══ MOBILE: TESTO CASSA DEL VIAGGIATORE PIÙ GRANDE ═══ */
+@media(max-width:768px){
+  .regalo-text{
+    font-size:1.18rem !important;
+    line-height:2 !important;
+  }
+
+  .regalo-text p{
+    margin-bottom:1.35rem !important;
+  }
+
+  /* NON aumenta il titolo */
+  .regalo-section .section-h{
+    font-size:clamp(2.2rem,4vw,3.5rem) !important;
+  }
+}
+</style>
+
+
+<style>
+/* ═══ MOBILE: TESTO CUCCARO VETERE PIÙ GRANDE ═══ */
+@media(max-width:768px){
+  .cuccaro-text{
+    font-size:1.18rem !important;
+    line-height:2 !important;
+  }
+
+  .cuccaro-text p{
+    margin-bottom:1.35rem !important;
+  }
+
+  /* mantiene invariato il titolo */
+  .cuccaro-header h2{
+    font-size:clamp(2.2rem,5vw,3.5rem) !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- SPLASH SCREEN -->
@@ -1879,7 +1919,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
       <div class="venue-text">
         <h3>Chiesa dei Ss. Apostoli Pietro e Paolo</h3>
         <a class="venue-location" href="https://www.google.com/maps/place/Parrocchia+Santi+Apostoli+Pietro+e+Paolo/data=!4m2!3m1!1s0x1344051322c45d4f:0xd0b385718cdaeeb8" target="_blank" rel="noopener">📍 Pisciotta, Cilento (SA) &nbsp;↗</a>
-        <p class="venue-desc">Ci uniremo in matrimonio nella chiesa del borgo medievale di Pisciotta, arroccato tra gli ulivi del Cilento con il mare sullo sfondo.</p>
+        <p class="venue-desc">Ci uniremo in matrimonio nella suggestiva chiesa del borgo medievale di Pisciotta, un gioiello del Cilento arroccato tra antichi ulivi e affacciato su un mare che sembra infinito. Un luogo autentico e senza tempo, dove storia, natura e panorami mozzafiato faranno da cornice al nostro giorno più bello.</p>
         <div class="venue-detail-pills">
           <span class="pill">⛪ Rito religioso</span>
           <span class="pill">🕒 Ore 15:00</span>
@@ -1908,7 +1948,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
       <div class="venue-text">
         <h3>Savoy Beach Hotel</h3>
         <a class="venue-location" href="https://www.google.com/maps/place/Savoy+Hotel+%26+Spa,+Via+Poseidonia,+41,+84047+Paestum+SA/@40.4292193,14.9851248,17z" target="_blank" rel="noopener">📍 Paestum, Cilento (SA) &nbsp;↗</a>
-        <p class="venue-desc">Il ricevimento si terrà al Savoy Beach Hotel, a pochi passi dai templi di Paestum. Una serata indimenticabile tra musica, brindisi e buona cucina.</p>
+        <p class="venue-desc">Il ricevimento si terrà presso Savoy Beach Hotel, a pochi passi dagli iconici templi di Parco Archeologico di Paestum.<br>In una cornice elegante e senza tempo, tra musica, brindisi e buona cucina.</p>
         <div class="venue-detail-pills">
           <span class="pill">🥂 Ricevimento</span>
           <span class="pill">🕒 Ore 17:00</span>
@@ -1959,7 +1999,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
       <div class="tl-content">
         <div class="time">Ore 14:00</div>
         <h4>🚌 Transfer da Palinuro</h4>
-        <p>Per gli invitati fuori regione: partenza da Residence Riviera e Hotel Ficocella verso Pisciotta per la cerimonia</p>
+        <p>Per gli invitati che arriveranno da fuori regione, sarà disponibile un servizio transfer con partenza da Residence Riviera e Hotel Ficocella verso Pisciotta, per raggiungere comodamente la cerimonia.</p>
       </div>
       <div class="tl-dot">🌊</div>
       <div class="tl-empty"></div>
@@ -1979,8 +2019,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
       <div class="tl-content">
         <div class="time">Dopo la cerimonia</div>
         <h4>🚌 Transfer per Paestum</h4>
-        <p>La partenza sarà dalla piazza di Pisciotta verso il Savoy Beach Hotel di Paestum.<br><br>
-        Per chi parte in auto: organizzatevi bene...fate spazio a chiacchiere, playlist nostalgiche e magari a qualche coro anni '90.</p>
+        <p>Al termine della cerimonia, il transfer partirà dalla piazza di Pisciotta in direzione Savoy Beach Hotel, dove proseguiranno i festeggiamenti.<br><br>🚗 Per chi viaggerà in auto: organizzatevi al meglio… lasciate spazio a sorrisi, racconti di viaggio, playlist da cantare a squarciagola e a quell’atmosfera spensierata che rende indimenticabili anche i chilometri percorsi insieme.</p>
       </div>
       <div class="tl-dot">🥂</div>
       <div class="tl-empty"></div>
@@ -1999,7 +2038,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
       <div class="tl-content">
         <div class="time">Al termine dei festeggiamenti</div>
         <h4>🚌 Rientro a Palinuro</h4>
-        <p>Transfer di ritorno verso Residence Riviera e Hotel Ficocella</p>
+        <p>Al termine della serata, sarà disponibile il servizio transfer di ritorno verso Residence Riviera e Hotel Ficocella, per permettere a tutti di rientrare in totale comodità</p>
       </div>
       <div class="tl-dot">🌙</div>
       <div class="tl-empty"></div>
@@ -2010,7 +2049,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 
 <section class="navetta">
   <div class="reveal">
-    <p class="tag-line" style="font-family:'Pinyon Script',cursive;font-size:2rem;text-align:center">Servizio navetta</p>
+    <p class="tag-line" style="font-family:'Pinyon Script',cursive;font-size:2rem;text-align:center">Servizio Transfer</p>
     <h2 class="section-h">Come raggiungerci</h2>
     <div class="nav-grid">
       <div class="nav-card">
