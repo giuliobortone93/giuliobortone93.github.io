@@ -1823,6 +1823,47 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 }
 </style>
 
+
+<style>
+/* ═══ FIX MOBILE TESTI + HERO ═══ */
+@media(max-width:768px){
+
+  /* HERO leggermente più alta */
+  .hero-inner{
+    transform: translateY(-28px) !important;
+  }
+
+  /* SOLO TESTI narrativi */
+  .regalo-text,
+  .regalo-text p{
+    font-size:1.30rem !important;
+    line-height:2.02 !important;
+    letter-spacing:.01em !important;
+  }
+
+  .cuccaro-text,
+  .cuccaro-text p{
+    font-size:1.30rem !important;
+    line-height:2.02 !important;
+    letter-spacing:.01em !important;
+  }
+
+  .regalo-text p,
+  .cuccaro-text p{
+    margin-bottom:1.45rem !important;
+  }
+
+  /* Ripristina dimensione titoli */
+  .regalo-section .section-h{
+    font-size:clamp(2.2rem,4vw,3.5rem) !important;
+  }
+
+  .cuccaro-header h2{
+    font-size:clamp(2.2rem,5vw,3.5rem) !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- SPLASH SCREEN -->
