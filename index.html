@@ -1695,6 +1695,30 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 }
 </style>
 
+
+<style>
+/* ═══ FIX HERO MOBILE TESTO PIÙ SCURO ═══ */
+@media(max-width:768px){
+
+  .scroll-hint,
+  .hero .scroll-hint,
+  body .scroll-hint{
+    color:#2b2115 !important;
+    opacity:1 !important;
+    font-weight:700 !important;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,.7),
+      0 2px 8px rgba(255,255,255,.45) !important;
+    letter-spacing:.16em !important;
+  }
+
+  .scroll-hint::after{
+    color:#7A9A4A !important;
+    opacity:1 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- SPLASH SCREEN -->
