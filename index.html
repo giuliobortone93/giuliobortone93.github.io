@@ -21,10 +21,8 @@
 html{scroll-behavior:smooth}
 body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--deep);overflow-x:hidden}
 
-/* PETALS */
-.petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.petal{position:absolute;border-radius:50% 0 50% 0;opacity:0;animation:petFall linear infinite}
-@keyframes petFall{0%{transform:translateY(-30px) rotate(0deg);opacity:.7}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+/* PETALS — disabled */
+.petals{display:none}
 
 /* HERO */
 .hero{position:relative;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
@@ -163,21 +161,23 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .split{grid-template-columns:1fr;min-height:auto;position:relative}
-  .split-photo{height:180vw;min-height:650px}
-  .split-photo img{object-position:center 20%}
+  /* SPLIT MOBILE: foto + card sovrapposta */
+  .split{display:block;min-height:auto;position:relative;background:var(--carta)}
+  .split-photo{height:75vw;min-height:260px;max-height:360px;width:100%;position:relative}
+  .split-photo img{object-position:center 20%;border-radius:0}
   .split-text{
-    position:absolute;
-    bottom:0;left:0;right:0;
-    background:linear-gradient(to top, rgba(245,240,232,1) 0%, rgba(245,240,232,1) 30%, rgba(245,240,232,.85) 55%, rgba(245,240,232,.3) 75%, transparent 100%);
-    padding:3rem 1.5rem 2.5rem;
+    position:relative;
+    background:white;
+    border-radius:24px 24px 0 0;
+    margin-top:-28px;
+    z-index:4;
+    padding:2rem 1.5rem 2.5rem;
+    box-shadow:0 -4px 24px rgba(0,0,0,.07);
   }
   .split-text::after{display:none}
-  .split-text h3{font-size:2rem;margin-bottom:.8rem;color:var(--pea-dark) !important;text-shadow:none;}
+  .split-text h3{font-size:1.9rem;margin-bottom:.9rem;color:var(--pea-dark) !important;text-shadow:none;}
   .split-text p{font-size:1rem;line-height:1.75;max-width:100%;color:#1A1A1A !important;}
   .split-text .tag{margin-bottom:.8rem;color:var(--gold) !important;}
-  .split-text p{font-size:.82rem;line-height:1.65;max-width:100%;color:rgba(255,255,255,.7)}
-  .split-text .tag{margin-bottom:.8rem}
   .timeline::before{left:22px}
   .tl-item{grid-template-columns:44px 1fr;gap:.8rem}
   .tl-item:nth-child(odd) .tl-content,.tl-item:nth-child(even) .tl-content{grid-column:2;text-align:left}
@@ -948,8 +948,8 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   z-index: 3;
 }
 @media(max-width:768px) {
-  .split::before { height: 100px; background: linear-gradient(to bottom, #F5F0E8 0%, rgba(245,240,232,.5) 50%, transparent 100%); }
-  .split::after { height: 0px; background: none; }
+  .split::before { display:none; }
+  .split::after  { display:none; }
 }
   pointer-events: none;
   z-index: 3;
@@ -1194,13 +1194,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 .film-header .tag-line { color: var(--gold) !important; }
 .film-header .section-h { color: #1A1A1A !important; }
 
-/* Split mobile fix */
-
-@media(max-width:768px) {
-  .split-text h3 { font-size: 1.8rem !important; color: var(--pea-dark) !important; }
-  .split-text p { font-size: .95rem !important; color: rgba(74,106,40,.85) !important; }
-  .split-text .tag { color: var(--gold) !important; }
-}
+/* Split mobile fix — handled above */
 
 
 
@@ -2060,15 +2054,7 @@ const B64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhE
 document.getElementById('couplePhoto').src = 'data:image/jpeg;base64,' + B64;
 document.getElementById('heroBg').style.backgroundImage = 'url(data:image/jpeg;base64,' + B64 + ')';
 
-// ─── Petals ───
-const PC = document.getElementById('petals');
-const cols = ['#B8965A','#E2C07A','#F0E0D0','#9B4A2A','#fff','#6B7B5E'];
-for(let i=0;i<30;i++){
-  const p=document.createElement('div');p.className='petal';
-  const sz=6+Math.random()*12;
-  p.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${6+Math.random()*12}s;animation-delay:${Math.random()*10}s;opacity:${.3+Math.random()*.5}`;
-  PC.appendChild(p);
-}
+// ─── Petals — disabled ───
 
 // ─── Countdown ───
 function tick(){
