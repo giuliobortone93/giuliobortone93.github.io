@@ -1175,7 +1175,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .venue-text .venue-desc { font-size: 1.22rem !important; line-height: 1.85 !important; }
   .tl-content h4 { font-size: 1.15rem !important; }
   .tl-content p { font-size: .95rem !important; }
-  .regalo-text { font-size: 1.05rem !important; }
+  .regalo-text { font-size: 1.35rem !important; }
   .cuccaro-text { font-size: 1.05rem !important; }
 }
 
@@ -1334,7 +1334,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 
 @media(max-width: 768px) {
   .venue-text .venue-desc { font-size: 1.22rem !important; line-height: 1.85 !important; }
-  .regalo-text { font-size: 1.05rem !important; }
+  .regalo-text { font-size: 1.35rem !important; }
   .cuccaro-text { font-size: 1.05rem !important; }
   .tl-content p { font-size: 1rem !important; }
   .nc-route { font-size: .95rem !important; }
@@ -1355,13 +1355,13 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   /* Cuccaro - mobile */
   .cuccaro-text { font-size: 1.15rem !important; line-height: 1.9 !important; }
   .cuccaro-text p { font-size: 1.15rem !important; color: #1A1A1A !important; }
-  .cuccaro-text .cuccaro-finale { font-size: 1.3rem !important; font-weight: 700 !important; }
+  .cuccaro-text .cuccaro-finale { font-size: 1.45rem !important; font-weight: 900 !important; }
   .cuccaro-header h2 { font-size: 2.5rem !important; }
   .cuccaro-badge { font-size: .8rem !important; padding: .5rem 1.2rem !important; }
 
   /* Regalo IBAN - mobile */
-  .regalo-text { font-size: 1.1rem !important; line-height: 1.9 !important; }
-  .regalo-text p { font-size: 1.1rem !important; color: #1A1A1A !important; }
+  .regalo-text { font-size: 1.35rem !important; line-height: 1.9 !important; }
+  .regalo-text p { font-size: 1.35rem !important; color: #1A1A1A !important; }
   .regalo-section .section-h { font-size: 2.2rem !important; }
   .iban-number { font-size: 1rem !important; }
   .iban-copy-btn { font-size: .8rem !important; padding: .6rem 1.2rem !important; }
@@ -1793,7 +1793,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .regalo-section .regalo-text,
   .regalo-text p,
   .regalo-section .regalo-text p{
-    font-size:1.05rem !important;
+    font-size:1.35rem !important;
     line-height:1.85 !important;
     font-weight:400 !important;
     letter-spacing:.01em !important;
@@ -2141,7 +2141,7 @@ p.cuccaro-finale,
     color:#162408 !important;
     -webkit-text-fill-color:#162408 !important;
     font-weight:900 !important;
-    font-size:1.12rem !important;
+    font-size:1.45rem !important;
     line-height:1.65 !important;
     font-style:normal !important;
   }
@@ -2701,11 +2701,11 @@ p.cuccaro-finale,
   </div>
 
     <div class="gift-choice-area">
-      <div class="gift-choice-title-small">Scegli la tua squadra</div>
+      <div class="gift-choice-title-small">Aiutaci a decidere dove andare</div>
 
       <div class="gift-choice-grid">
         <button type="button" class="gift-choice-card" onclick="openGiftPanel('spiaggia')">
-          <span class="gift-choice-emoji">🏝️</span>
+          <span class="gift-choice-emoji">🐬</span>
           <span class="gift-choice-name">Spiaggia</span>
           <span class="gift-choice-desc">mare, sole e cocktail</span>
         </button>
@@ -3139,7 +3139,7 @@ function openGiftPanel(choice){
   if(!panel || !label || !causale) return;
 
   if(choice === 'spiaggia'){
-    label.textContent = 'Hai scelto: Spiaggia 🏝️';
+    label.textContent = 'Hai scelto: Spiaggia 🐬';
     causale.textContent = '“Volo di sola andata — Team Spiaggia”';
   } else {
     label.textContent = 'Hai scelto: Orso polare 🐻‍❄️';
