@@ -95,7 +95,7 @@ body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--deep);ove
 .navetta .tag-line{color:var(--gold)}
 .nav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;max-width:900px;margin:0 auto}
 .nav-card{background:rgba(122,154,74,.08);border:1px solid rgba(122,154,74,.2);border-radius:14px;padding:1.5rem;transition:all .3s}
-.nav-card:hover{background:rgba(122,154,74,.15);border-color:var(--pea)}-gold);transform:translateY(-3px)}
+.nav-card:hover{background:rgba(122,154,74,.15);border-color:var(--pea);transform:translateY(-3px)}
 .nav-card .nc-time{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--pea-dark);font-weight:600;line-height:1}
 .nav-card .nc-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--pea-muted);margin:.3rem 0 .8rem}
 .nav-card .nc-route{font-size:.9rem;color:#1A1A1A;line-height:1.6}
@@ -951,16 +951,6 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   .split::before { display:none; }
   .split::after  { display:none; }
 }
-  pointer-events: none;
-  z-index: 3;
-}  pointer-events: none;
-  z-index: 3;
-}
- pointer-events: none;
-  z-index: 3;
-}
-
-
 @media(max-width: 768px) {
   .nav-toggle { display: flex !important; }
   .nav-links { display: none !important; }
@@ -1715,6 +1705,41 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .scroll-hint::after{
     color:#7A9A4A !important;
     opacity:1 !important;
+  }
+}
+</style>
+
+
+<style>
+/* ═══ MOBILE: TESTI NARRATIVI ANCORA PIÙ GRANDI ═══ */
+@media(max-width:768px){
+
+  /* LA CASSA DEL VIAGGIATORE */
+  .regalo-text{
+    font-size:1.32rem !important;
+    line-height:2.08 !important;
+    letter-spacing:.01em;
+  }
+
+  .regalo-text p{
+    margin-bottom:1.55rem !important;
+  }
+
+  /* CUCCARO VETERE */
+  .cuccaro-text{
+    font-size:1.32rem !important;
+    line-height:2.08 !important;
+    letter-spacing:.01em;
+  }
+
+  .cuccaro-text p{
+    margin-bottom:1.55rem !important;
+  }
+
+  /* NON tocca i titoli */
+  .regalo-section .section-h,
+  .cuccaro-header h2{
+    transform:none !important;
   }
 }
 </style>
