@@ -1744,6 +1744,85 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 }
 </style>
 
+
+<style>
+/* ═══ HERO CLAIM IN GRASSETTO ═══ */
+.scroll-hint,
+.hero .scroll-hint{
+  font-weight: 700 !important;
+}
+</style>
+
+
+<style>
+/* ═══ MOBILE: CONTINUITÀ HERO → SUBHERO ═══ */
+@media(max-width:768px){
+
+  .split{
+    position:relative;
+  }
+
+  .split::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:120px;
+    z-index:5;
+    pointer-events:none;
+
+    background:linear-gradient(
+      to bottom,
+      rgba(245,240,232,.98) 0%,
+      rgba(245,240,232,.82) 35%,
+      rgba(245,240,232,.45) 65%,
+      rgba(245,240,232,0) 100%
+    ) !important;
+  }
+}
+</style>
+
+
+<style>
+/* ═══ MOBILE: TESTI VIAGGIO E CUCCARO MOLTO PIÙ GRANDI ═══ */
+@media(max-width:768px){
+
+  /* Testo viaggio */
+  .regalo-text,
+  .regalo-section .regalo-text,
+  .regalo-text p,
+  .regalo-section .regalo-text p{
+    font-size:1.48rem !important;
+    line-height:2.12 !important;
+    font-weight:400 !important;
+    letter-spacing:.01em !important;
+  }
+
+  /* Testo Cuccaro */
+  .cuccaro-text,
+  .cuccaro-section .cuccaro-text,
+  .cuccaro-text p,
+  .cuccaro-section .cuccaro-text p{
+    font-size:1.48rem !important;
+    line-height:2.12 !important;
+    font-weight:400 !important;
+    letter-spacing:.01em !important;
+  }
+
+  .regalo-text p,
+  .cuccaro-text p{
+    margin-bottom:1.7rem !important;
+  }
+
+  /* NON modifica i titoli */
+  .regalo-section .section-h,
+  .cuccaro-header h2{
+    font-size:inherit !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- SPLASH SCREEN -->
