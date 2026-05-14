@@ -2053,243 +2053,97 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 </style>
 
 
-<style id="final-fixes-giulio">
-/* ===== FIX FINALI DEFINITIVI ===== */
 
-/* Desktop: scroll hint piccolo, non gigante */
+
+
+
+
+
+<style id="correzioni-finali-precise">
+/* ===== CORREZIONI PRECISE FINALI ===== */
+
+/* “Perché i giorni belli…”: stesso stile/colore dorato, solo più leggibile */
+.hero .eyebrow,
+.eyebrow{
+  color:var(--gold) !important;
+  font-weight:600 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+
+/* “Scorri per confermare...” torna piccolo */
+.hero .scroll-hint,
 .scroll-hint{
-  font-size:.58rem !important;
-  font-weight:700 !important;
-  letter-spacing:.20em !important;
-  color:#24180f !important;
-  opacity:1 !important;
-  text-shadow:0 1px 0 rgba(255,255,255,.65),0 2px 8px rgba(255,255,255,.35) !important;
+  font-size:.65rem !important;
+  font-weight:400 !important;
+  letter-spacing:.25em !important;
+  color:rgba(255,255,255,.55) !important;
+  text-shadow:none !important;
 }
+
+.hero .scroll-hint::after,
 .scroll-hint::after{
-  font-size:.85rem !important;
-  color:#4A6A28 !important;
+  font-size:1rem !important;
+  color:var(--gold) !important;
 }
 
-/* Frase finale Cuccaro marcata */
-.cuccaro-text .cuccaro-finale,
-p.cuccaro-finale{
-  color:#142007 !important;
+/* Frase finale Cuccaro: grassetto vero e molto scura */
+.cuccaro-text p.cuccaro-finale,
+p.cuccaro-finale,
+.cuccaro-finale{
+  color:#1f2f0f !important;
   font-weight:900 !important;
   opacity:1 !important;
-}
-
-/* Claim hero: solo se esiste una classe dedicata */
-.hero-subtitle,
-.hero-claim,
-.hero-tagline{
-  color:#140d07 !important;
-  font-weight:900 !important;
+  -webkit-text-fill-color:#1f2f0f !important;
+  font-style:normal !important;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
-  /* Hero testo più in alto */
-  .hero-inner{
-    transform:translateY(-55px) !important;
-  }
-
-  /* Scroll hint piccolo */
-  .scroll-hint{
-    font-size:.48rem !important;
-    font-weight:700 !important;
-    letter-spacing:.15em !important;
-    bottom:1.35rem !important;
-    color:#21160d !important;
-  }
-  .scroll-hint::after{
-    font-size:.75rem !important;
-  }
-
-  /* Sfumatura alta subhero / split */
-  .split{
-    position:relative !important;
-    overflow:hidden !important;
-  }
-  .split::before{
-    display:block !important;
-    content:'' !important;
-    position:absolute !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    height:155px !important;
-    z-index:10 !important;
-    pointer-events:none !important;
-    background:linear-gradient(
-      to bottom,
-      rgba(245,240,232,1) 0%,
-      rgba(245,240,232,.92) 25%,
-      rgba(245,240,232,.68) 52%,
-      rgba(245,240,232,.30) 78%,
-      rgba(245,240,232,0) 100%
-    ) !important;
-  }
-
-  /* Testo viaggio e Cuccaro: leggibile ma non enorme */
-  .regalo-text,
-  .regalo-text p,
-  .cuccaro-text,
-  .cuccaro-text p{
-    font-size:1.12rem !important;
-    line-height:1.88 !important;
-    letter-spacing:.005em !important;
-  }
-
-  .regalo-text p,
-  .cuccaro-text p{
-    margin-bottom:1.18rem !important;
-  }
-
-  /* NON modificare i titoli */
-  .regalo-section .section-h{
-    font-size:clamp(2.2rem,4vw,3.5rem) !important;
-  }
-  .cuccaro-header h2{
-    font-size:clamp(2.2rem,5vw,3.5rem) !important;
-  }
-
-  /* Ultima frase Cuccaro molto scura e in grassetto */
-  .cuccaro-text .cuccaro-finale,
-  p.cuccaro-finale{
-    color:#102000 !important;
-    font-weight:900 !important;
-    font-size:1.22rem !important;
-    line-height:1.62 !important;
-    opacity:1 !important;
-  }
-}
-</style>
-
-
-<style id="correzioni-finali-reali">
-/* ===== CORREZIONI REALI FINALI ===== */
-
-/* Frase "Perché i giorni belli si vivono in compagnia" */
-.eyebrow{
-  color:#1b1209 !important;
-  font-weight:900 !important;
-  opacity:1 !important;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.35),
-    0 3px 12px rgba(255,255,255,.25) !important;
-}
-
-/* Testo "Scorri per confermare..." piccolo */
-.scroll-hint{
-  font-size:.52rem !important;
-  font-weight:600 !important;
-  letter-spacing:.18em !important;
-  color:#24180f !important;
-  opacity:1 !important;
-}
-.scroll-hint::after{
-  font-size:.75rem !important;
-  color:#4A6A28 !important;
-}
-
-/* Cuccaro finale molto scura e marcata */
-.cuccaro-text .cuccaro-finale,
-p.cuccaro-finale{
-  color:#0d1b04 !important;
-  font-weight:900 !important;
-  opacity:1 !important;
-}
-
-/* Mobile */
-@media(max-width:768px){
-
-  /* Hero più in alto */
+  /* Hero leggermente più in alto, senza alterare stile */
   .hero-inner{
     transform:translateY(-60px) !important;
   }
 
-  /* SOLO la frase "Perché i giorni belli..." */
+  /* Solo frase “Perché i giorni belli…” più grande, mantenendo dorato */
+  .hero .eyebrow,
   .eyebrow{
-    font-size:.92rem !important;
-    line-height:1.55 !important;
-    letter-spacing:.18em !important;
-    color:#0f0a04 !important;
-    font-weight:900 !important;
-    opacity:1 !important;
-    text-shadow:
-      0 1px 0 rgba(255,255,255,.45),
-      0 2px 10px rgba(255,255,255,.25) !important;
-  }
-
-  /* "Scorri per confermare..." molto più piccolo */
-  .scroll-hint{
-    font-size:.44rem !important;
+    font-size:.86rem !important;
+    line-height:1.45 !important;
+    letter-spacing:.22em !important;
+    color:var(--gold) !important;
     font-weight:600 !important;
-    letter-spacing:.15em !important;
-    color:#2a1d12 !important;
-    bottom:1.35rem !important;
+    text-shadow:none !important;
   }
+
+  /* “Scorri per confermare...” molto piccolo come prima */
+  .hero .scroll-hint,
+  .scroll-hint{
+    font-size:.55rem !important;
+    font-weight:400 !important;
+    letter-spacing:.25em !important;
+    color:rgba(0,0,0,.75) !important;
+    bottom:1.2rem !important;
+    text-shadow:none !important;
+  }
+
+  .hero .scroll-hint::after,
   .scroll-hint::after{
-    font-size:.68rem !important;
+    font-size:1rem !important;
+    color:var(--gold) !important;
   }
 
-  /* Sfumatura alta subhero */
-  .split{
-    position:relative !important;
-    overflow:hidden !important;
-  }
-  .split::before{
-    display:block !important;
-    content:'' !important;
-    position:absolute !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    height:155px !important;
-    z-index:10 !important;
-    pointer-events:none !important;
-    background:linear-gradient(
-      to bottom,
-      rgba(245,240,232,1) 0%,
-      rgba(245,240,232,.92) 25%,
-      rgba(245,240,232,.68) 52%,
-      rgba(245,240,232,.30) 78%,
-      rgba(245,240,232,0) 100%
-    ) !important;
-  }
-
-  /* Testi narrativi viaggio e Cuccaro: solo testo, non titoli */
-  .regalo-text,
-  .regalo-text p,
-  .cuccaro-text,
-  .cuccaro-text p{
-    font-size:1.12rem !important;
-    line-height:1.88 !important;
-    letter-spacing:.005em !important;
-  }
-
-  .regalo-text p,
-  .cuccaro-text p{
-    margin-bottom:1.18rem !important;
-  }
-
-  /* Titoli invariati */
-  .regalo-section .section-h{
-    font-size:clamp(2.2rem,4vw,3.5rem) !important;
-  }
-  .cuccaro-header h2{
-    font-size:clamp(2.2rem,5vw,3.5rem) !important;
-  }
-
-  /* Ultima frase Cuccaro molto scura, marcata e leggermente più grande */
-  .cuccaro-text .cuccaro-finale,
-  p.cuccaro-finale{
-    color:#071400 !important;
+  /* Frase finale Cuccaro in grassetto su mobile */
+  .cuccaro-text p.cuccaro-finale,
+  p.cuccaro-finale,
+  .cuccaro-finale{
+    color:#162408 !important;
+    -webkit-text-fill-color:#162408 !important;
     font-weight:900 !important;
-    font-size:1.24rem !important;
-    line-height:1.62 !important;
-    opacity:1 !important;
+    font-size:1.18rem !important;
+    line-height:1.65 !important;
+    font-style:normal !important;
   }
 }
 </style>
