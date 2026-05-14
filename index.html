@@ -2148,6 +2148,63 @@ p.cuccaro-finale,
 }
 </style>
 
+
+<style id="subhero-gradient-mobile-fix">
+/* ===== SFUMATURA MOBILE ALTA SUBHERO ===== */
+@media(max-width:768px){
+  .split{
+    position:relative !important;
+    overflow:hidden !important;
+  }
+
+  .split::before{
+    display:block !important;
+    content:'' !important;
+    position:absolute !important;
+    top:0 !important;
+    left:0 !important;
+    right:0 !important;
+    height:170px !important;
+    z-index:20 !important;
+    pointer-events:none !important;
+    background:linear-gradient(
+      to bottom,
+      #F5F0E8 0%,
+      rgba(245,240,232,.92) 24%,
+      rgba(245,240,232,.70) 50%,
+      rgba(245,240,232,.35) 75%,
+      rgba(245,240,232,0) 100%
+    ) !important;
+  }
+}
+</style>
+
+
+<style id="cuccaro-finale-only-fix">
+/* SOLO ultima frase sezione Cuccaro */
+.cuccaro-text p.cuccaro-finale,
+p.cuccaro-finale,
+.cuccaro-finale{
+  color:#132207 !important;
+  -webkit-text-fill-color:#132207 !important;
+  font-weight:900 !important;
+  opacity:1 !important;
+  font-style:normal !important;
+}
+
+@media(max-width:768px){
+  .cuccaro-text p.cuccaro-finale,
+  p.cuccaro-finale,
+  .cuccaro-finale{
+    color:#0b1802 !important;
+    -webkit-text-fill-color:#0b1802 !important;
+    font-weight:900 !important;
+    opacity:1 !important;
+    font-style:normal !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- SPLASH SCREEN -->
