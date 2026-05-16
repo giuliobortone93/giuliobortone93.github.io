@@ -357,17 +357,24 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 }
 .film-track-wrap::-webkit-scrollbar { display: none; }
 .film-track-wrap:active { cursor: grabbing; }
-/* Mobile: native scroll */
+/* Mobile: scroll nativo — orizzontale drag + verticale libero */
 @media(max-width: 768px) {
   .film-track-wrap {
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     scrollbar-width: none;
     cursor: default;
+    pointer-events: auto;
   }
   .film-track-wrap::-webkit-scrollbar { display: none; }
+  /* su mobile il track non si anima, usa scroll nativo */
+  .film-track {
+    animation: none !important;
+    transform: none !important;
+    width: max-content;
+  }
 }
 /* fade edges */
 .film-track-wrap::before,
@@ -2536,13 +2543,13 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     track.style.transform = `translateX(${pos}px)`;
   });
 
-  // ─── TOUCH (mobile) ─── skip on mobile (uses native CSS scroll)
-  const isMobileDevice = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 900);
+  // ─── TOUCH (mobile) ─── scroll nativo CSS, JS solo desktop
+  const isMobileDevice = window.innerWidth <= 768;
   if (isMobileDevice) {
-    // On mobile: stop the CSS animation, let native scroll handle it
+    // ferma animazione CSS, scroll nativo gestisce tutto
     track.style.animation = 'none';
-    track.style.transform = '';
-    return; // exit the filmstrip JS entirely on mobile
+    track.style.transform = 'none';
+    return;
   }
 
   let tStartX = 0, tStartY = 0, tStartLeft = 0, tLastX = 0, tLastTime = 0;
