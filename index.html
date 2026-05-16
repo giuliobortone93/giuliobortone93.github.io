@@ -2549,9 +2549,12 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     track.style.animation = 'none';
     track.style.transform = 'none';
 
-    // Duplica il contenuto per loop infinito
+    // Duplica il contenuto per loop infinito (affiancato dentro il wrap)
     const clone = track.cloneNode(true);
-    track.parentElement.appendChild(clone);
+    wrap.appendChild(clone);
+    // wrap diventa flex row per affiancare i due track
+    wrap.style.display = 'flex';
+    wrap.style.flexDirection = 'row';
 
     let userTouching = false;
     let autoPos = 0;
