@@ -340,11 +340,8 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 /* The actual filmstrip track */
 .film-track-wrap {
   position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   touch-action: none;
-  scrollbar-width: none;
   cursor: grab;
 }
 .film-track-wrap::-webkit-scrollbar { display: none; }
@@ -453,14 +450,6 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   margin-top: 2.5rem;
   position: relative; z-index: 2;
 }
-.film-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.2);
-  cursor: pointer;
-  transition: background .3s, transform .3s;
-}
-.film-dot.active { background: var(--gold); transform: scale(1.4); }
 
 @media(max-width: 600px) {
   .film-frame { width: 260px; height: 320px; }
@@ -1503,308 +1492,72 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 @media(max-width:768px){
   .places-date-break { display: block; }
 }
-</style>
-
-<style>
-/* ═══ SCELTA REGALO: SPIAGGIA / ORSO POLARE ═══ */
-.gift-choice-area{
-  max-width:760px;
-  margin:2.4rem auto 0;
-  text-align:center;
-}
-.gift-choice-title-small{
-  font-family:'Jost',sans-serif;
-  font-size:.72rem;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  color:var(--pea-dark);
-  margin-bottom:1.2rem;
-}
-.gift-choice-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:1rem;
-}
-.gift-choice-card{
-  position:relative;
-  border:1.5px solid rgba(122,154,74,.35);
-  background:rgba(122,154,74,.055);
-  border-radius:22px;
-  padding:1.7rem 1rem 1.5rem;
-  cursor:pointer;
-  color:var(--pea-dark);
-  font-family:'Jost',sans-serif;
-  transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-  user-select:none;
-}
-.gift-choice-card:hover{
-  transform:translateY(-4px);
-  background:white;
-  border-color:var(--pea);
-  box-shadow:0 12px 32px rgba(74,106,40,.13);
-}
-.gift-choice-card:active,
-.gift-choice-card.touching{
-  transform:scale(.96);
-  background:white;
-  border-color:var(--pea);
-  box-shadow:0 4px 14px rgba(74,106,40,.18);
-  transition:transform .08s ease;
-}
-.gift-choice-emoji{
-  display:block;
-  font-size:2.5rem;
-  margin-bottom:.65rem;
-}
-.gift-choice-name{
-  display:block;
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.75rem;
-  line-height:1;
-  font-weight:600;
-  color:var(--pea-dark);
-}
-.gift-choice-desc{
-  display:block;
-  margin-top:.55rem;
-  font-size:.68rem;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:rgba(74,106,40,.65);
-}
-.gift-iban-panel{
-  display:none;
-  position:relative;
-  margin:2rem auto 0;
-  max-width:720px;
-  animation:giftPanelIn .22s ease both;
-}
-.gift-iban-panel.open{
-  display:block;
-}
-@keyframes giftPanelIn{
-  from{opacity:0;transform:translateY(18px) scale(.98)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-.gift-panel-close{
-  position:absolute;
-  top:-14px;
-  right:-8px;
-  z-index:4;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  border:1px solid rgba(122,154,74,.35);
-  background:white;
-  color:var(--pea-dark);
-  font-size:1.45rem;
-  line-height:1;
-  cursor:pointer;
-  box-shadow:0 4px 14px rgba(0,0,0,.08);
-}
-.gift-panel-choice{
-  font-family:'Jost',sans-serif;
-  font-size:.72rem;
-  letter-spacing:.24em;
-  text-transform:uppercase;
-  color:var(--pea);
-  margin-bottom:.8rem;
-}
-.gift-iban-box{
-  margin-bottom:0 !important;
-}
-.gift-holder{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.35rem;
-  color:var(--pea-dark);
-  margin-bottom:1.1rem;
-}
-.iban-label-spaced{
-  margin-top:1.1rem;
-}
-@media(max-width:650px){
-  .gift-choice-grid{
-    grid-template-columns:1fr;
-  }
-  .gift-choice-card{
-    padding:1.35rem 1rem;
-  }
-  .gift-choice-emoji{
-    font-size:2.1rem;
-  }
-  .gift-choice-name{
-    font-size:1.55rem;
-  }
-  .gift-panel-close{
-    right:0;
-  }
-}
-</style>
 
 
-<style>
-/* ═══ MOBILE: TESTO CASSA DEL VIAGGIATORE PIÙ GRANDE ═══ */
-@media(max-width:768px){
-  .regalo-text{
-    font-size:1.18rem !important;
-    line-height:2 !important;
-  }
-
-  .regalo-text p{
-    margin-bottom:1.35rem !important;
-  }
-
-  /* NON aumenta il titolo */
-  .regalo-section .section-h{
-    font-size:clamp(2.2rem,4vw,3.5rem) !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ MOBILE: TESTO CUCCARO VETERE PIÙ GRANDE ═══ */
-@media(max-width:768px){
-  .cuccaro-text{
-    font-size:1.18rem !important;
-    line-height:2 !important;
-  }
-
-  .cuccaro-text p{
-    margin-bottom:1.35rem !important;
-  }
-
-  /* mantiene invariato il titolo */
-  .cuccaro-header h2{
-    font-size:clamp(2.2rem,5vw,3.5rem) !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ HERO: TESTO PIÙ SCURO ═══ */
-.scroll-hint{
-  color: rgba(255,255,255,.82) !important;
-  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+/* ═══ EXTRA STYLES ═══ */
+/* ─── EYEBROW: stesso colore della data ─── */
+.eyebrow{color:var(--gold2);opacity:1 !important}
+.hero .eyebrow,
+.eyebrow{
+  color:var(--gold2) !important;
+  font-weight:600 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
 }
 
-@media(max-width:768px){
-  .scroll-hint{
-    color: rgba(40,30,15,.95) !important;
-    text-shadow: 0 2px 10px rgba(255,255,255,.35);
-    font-weight: 600 !important;
-    letter-spacing: .18em !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ FIX HERO MOBILE TESTO PIÙ SCURO ═══ */
-@media(max-width:768px){
-
-  .scroll-hint,
-  .hero .scroll-hint,
-  body .scroll-hint{
-    color:#2b2115 !important;
-    opacity:1 !important;
-    font-weight:700 !important;
-    text-shadow:
-      0 1px 0 rgba(255,255,255,.7),
-      0 2px 8px rgba(255,255,255,.45) !important;
-    letter-spacing:.16em !important;
-  }
-
-  .scroll-hint::after{
-    color:#7A9A4A !important;
-    opacity:1 !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ MOBILE: TESTI NARRATIVI ANCORA PIÙ GRANDI ═══ */
-@media(max-width:768px){
-
-  /* LA CASSA DEL VIAGGIATORE */
-  .regalo-text{
-    font-size:1.32rem !important;
-    line-height:2.08 !important;
-    letter-spacing:.01em;
-  }
-
-  .regalo-text p{
-    margin-bottom:1.55rem !important;
-  }
-
-  /* CUCCARO VETERE */
-  .cuccaro-text{
-    font-size:1.32rem !important;
-    line-height:2.08 !important;
-    letter-spacing:.01em;
-  }
-
-  .cuccaro-text p{
-    margin-bottom:1.55rem !important;
-  }
-
-  /* NON tocca i titoli */
-  .regalo-section .section-h,
-  .cuccaro-header h2{
-    transform:none !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ HERO CLAIM IN GRASSETTO ═══ */
+/* ─── SCROLL HINT ─── */
 .scroll-hint,
 .hero .scroll-hint{
-  font-weight: 700 !important;
+  color:rgba(255,255,255,.82) !important;
+  font-weight:600 !important;
+  font-size:.72rem !important;
+  letter-spacing:.32em !important;
+  text-transform:uppercase !important;
+  opacity:1 !important;
 }
-</style>
-
-
-<style>
-/* ═══ MOBILE: CONTINUITÀ HERO → SUBHERO ═══ */
 @media(max-width:768px){
-
-  .split{
-    position:relative;
-  }
-
-  .split::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:120px;
-    z-index:5;
-    pointer-events:none;
-
-    background:linear-gradient(
-      to bottom,
-      rgba(245,240,232,.98) 0%,
-      rgba(245,240,232,.82) 35%,
-      rgba(245,240,232,.45) 65%,
-      rgba(245,240,232,0) 100%
-    ) !important;
+  .scroll-hint,
+  .hero .scroll-hint{
+    font-size:.66rem !important;
+    letter-spacing:.22em !important;
+    color:rgba(255,255,255,.82) !important;
+    font-weight:600 !important;
+    opacity:1 !important;
+    text-shadow:none !important;
   }
 }
-</style>
 
-
-<style>
-/* ═══ MOBILE: TESTI VIAGGIO E CUCCARO MOLTO PIÙ GRANDI ═══ */
+/* ─── SUBHERO (split section) ─── */
 @media(max-width:768px){
+  .split,
+  .split-photo,
+  .split-text{
+    min-height:auto !important;
+  }
+  .split-text{
+    padding-top:3rem !important;
+    padding-bottom:3rem !important;
+  }
+  .split-text::before{
+    height:4rem !important;
+  }
+}
 
-  /* Testo viaggio */
+/* ─── VENUE DESC ─── */
+.venue-text .venue-desc {
+  color:#1A1A1A !important;
+  font-size:1.35rem !important;
+  line-height:1.85 !important;
+}
+@media(max-width:768px){
+  .venue-text .venue-desc { font-size:1.22rem !important; line-height:1.85 !important; }
+}
+
+/* ─── REGALO / CUCCARO TESTO ─── */
+.regalo-text { color:#1A1A1A !important; font-size:1.35rem !important; line-height:2 !important; }
+.cuccaro-text { color:#1A1A1A !important; font-size:1.35rem !important; line-height:2 !important; }
+.cuccaro-text .cuccaro-finale { color:#1A1A1A !important; font-size:1.35rem !important; }
+@media(max-width:768px){
   .regalo-text,
   .regalo-section .regalo-text,
   .regalo-text p,
@@ -1814,8 +1567,6 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
     font-weight:400 !important;
     letter-spacing:.01em !important;
   }
-
-  /* Testo Cuccaro */
   .cuccaro-text,
   .cuccaro-section .cuccaro-text,
   .cuccaro-text p,
@@ -1825,332 +1576,26 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
     font-weight:400 !important;
     letter-spacing:.01em !important;
   }
-
   .regalo-text p,
   .cuccaro-text p{
     margin-bottom:1.7rem !important;
   }
-
-  /* NON modifica i titoli */
   .regalo-section .section-h,
   .cuccaro-header h2{
-    font-size:inherit !important;
+    font-size:clamp(2rem,6vw,3rem) !important;
+    line-height:1.15 !important;
   }
 }
-</style>
 
-
-<style>
-/* ═══ FIX MOBILE TESTI + HERO ═══ */
-@media(max-width:768px){
-
-  /* HERO leggermente più alta */
-  .hero-inner{
-    transform: translateY(-28px) !important;
-  }
-
-  /* SOLO TESTI narrativi */
-  .regalo-text,
-  .regalo-text p{
-    font-size:1.30rem !important;
-    line-height:2.02 !important;
-    letter-spacing:.01em !important;
-  }
-
-  .cuccaro-text,
-  .cuccaro-text p{
-    font-size:1.30rem !important;
-    line-height:2.02 !important;
-    letter-spacing:.01em !important;
-  }
-
-  .regalo-text p,
-  .cuccaro-text p{
-    margin-bottom:1.45rem !important;
-  }
-
-  /* Ripristina dimensione titoli */
-  .regalo-section .section-h{
-    font-size:clamp(2.2rem,4vw,3.5rem) !important;
-  }
-
-  .cuccaro-header h2{
-    font-size:clamp(2.2rem,5vw,3.5rem) !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ FINAL MOBILE TUNING ═══ */
-@media(max-width:768px){
-
-  /* HERO più in alto */
-  .hero-inner{
-    transform:translateY(-55px) !important;
-  }
-
-  /* TESTI viaggio e Cuccaro leggermente più piccoli */
-  .regalo-text,
-  .regalo-text p{
-    font-size:1.14rem !important;
-    line-height:1.92 !important;
-    letter-spacing:.005em !important;
-  }
-
-  .cuccaro-text,
-  .cuccaro-text p{
-    font-size:1.14rem !important;
-    line-height:1.92 !important;
-    letter-spacing:.005em !important;
-  }
-
-  .regalo-text p,
-  .cuccaro-text p{
-    margin-bottom:1.25rem !important;
-  }
-
-  /* Ultima frase Cuccaro di nuovo in evidenza */
-  .cuccaro-text .cuccaro-finale{
-    font-size:1.22rem !important;
-    font-weight:700 !important;
-    color:var(--pea-dark) !important;
-    line-height:1.7 !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ FINAL POLISH ═══ */
-
-/* Hero claim più grande e scuro */
-.scroll-hint,
-.hero .scroll-hint{
-  color:#22180f !important;
-  font-size:.82rem !important;
-  font-weight:800 !important;
-  opacity:1 !important;
-  letter-spacing:.18em !important;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.55),
-    0 3px 10px rgba(255,255,255,.28) !important;
-}
-
-.scroll-hint::after{
-  color:#4A6A28 !important;
-  font-size:1.1rem !important;
-}
-
-@media(max-width:768px){
-
-  .scroll-hint,
-  .hero .scroll-hint{
-    color:#1d140c !important;
-    font-size:.9rem !important;
-    font-weight:900 !important;
-    letter-spacing:.14em !important;
-    bottom:1.9rem !important;
-  }
-
-  /* Frase finale Cuccaro molto più scura */
-  .cuccaro-text .cuccaro-finale{
-    color:#243514 !important;
-    font-weight:800 !important;
-    font-size:1.22rem !important;
-    text-shadow:none !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ FIX HERO + CUCCARO MOBILE ═══ */
-
-/* SOLO "Perché i giorni belli..." */
-.scroll-hint{
-  font-size:.58rem !important;
-  font-weight:500 !important;
-  letter-spacing:.22em !important;
-  color:#2a1d12 !important;
-}
-
-/* Freccia sotto */
-.scroll-hint::after{
-  font-size:.9rem !important;
-  color:#4A6A28 !important;
-}
-
-/* Claim principale hero più grande */
-.hero-subtitle,
-.hero-claim,
-.hero-tagline{
-  font-size:1.08rem !important;
-  font-weight:800 !important;
-  color:#1f150d !important;
-  letter-spacing:.04em !important;
-}
-
-@media(max-width:768px){
-
-  /* Scroll hint piccolo */
-  .scroll-hint{
-    font-size:.5rem !important;
-    font-weight:600 !important;
-    letter-spacing:.16em !important;
-    bottom:1.4rem !important;
-    color:#24180f !important;
-  }
-
-  .scroll-hint::after{
-    font-size:.78rem !important;
-  }
-
-  /* SOLO la frase "Perché i giorni belli..." */
-  .hero-subtitle,
-  .hero-claim,
-  .hero-tagline{
-    font-size:1.18rem !important;
-    line-height:1.7 !important;
-    font-weight:900 !important;
-    color:#140d07 !important;
-    text-shadow:
-      0 1px 0 rgba(255,255,255,.35),
-      0 2px 8px rgba(255,255,255,.2) !important;
-  }
-
-  /* Frase finale Cuccaro davvero marcata */
-  .cuccaro-finale,
-  .cuccaro-text .cuccaro-finale,
-  p.cuccaro-finale{
-    color:#18230d !important;
-    font-weight:900 !important;
-    font-size:1.26rem !important;
-    line-height:1.65 !important;
-    opacity:1 !important;
-  }
-}
-</style>
-
-
-<style>
-/* ═══ MOBILE SUBHERO TOP GRADIENT ═══ */
-@media(max-width:768px){
-
-  .split,
-  .subhero,
-  .intro-section{
-    position:relative !important;
-    overflow:hidden !important;
-  }
-
-  .split::before,
-  .subhero::before,
-  .intro-section::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:140px;
-    z-index:8;
-    pointer-events:none;
-
-    background:linear-gradient(
-      to bottom,
-      rgba(245,240,232,1) 0%,
-      rgba(245,240,232,.92) 22%,
-      rgba(245,240,232,.72) 45%,
-      rgba(245,240,232,.38) 70%,
-      rgba(245,240,232,0) 100%
-    ) !important;
-  }
-}
-</style>
-
-
-
-
-
-
-
-
-<style id="correzioni-finali-precise">
-/* ===== CORREZIONI PRECISE FINALI ===== */
-
-/* “Perché i giorni belli…”: stesso stile/colore dorato, solo più leggibile */
-.hero .eyebrow,
-.eyebrow{
-  color:var(--gold2) !important;
-  font-weight:600 !important;
-  opacity:1 !important;
-  text-shadow:none !important;
-}
-
-/* “Scorri per confermare...” torna piccolo */
-.hero .scroll-hint,
-.scroll-hint{
-  font-size:.65rem !important;
-  font-weight:400 !important;
-  letter-spacing:.25em !important;
-  color:rgba(255,255,255,.55) !important;
-  text-shadow:none !important;
-}
-
-.hero .scroll-hint::after,
-.scroll-hint::after{
-  font-size:1rem !important;
-  color:var(--gold) !important;
-}
-
-/* Frase finale Cuccaro: grassetto vero e molto scura */
+/* ─── CUCCARO FINALE GRASSETTO ─── */
 .cuccaro-text p.cuccaro-finale,
 p.cuccaro-finale,
 .cuccaro-finale{
-  color:#1f2f0f !important;
+  color:#1A1A1A !important;
   font-weight:900 !important;
-  opacity:1 !important;
-  -webkit-text-fill-color:#1f2f0f !important;
   font-style:normal !important;
 }
-
-/* MOBILE */
 @media(max-width:768px){
-
-  /* Hero leggermente più in alto, senza alterare stile */
-  .hero-inner{
-    transform:translateY(-60px) !important;
-  }
-
-  /* Solo frase “Perché i giorni belli…” più grande, mantenendo dorato */
-  .hero .eyebrow,
-  .eyebrow{
-    font-size:.86rem !important;
-    line-height:1.45 !important;
-    letter-spacing:.22em !important;
-    color:var(--gold2) !important;
-    font-weight:600 !important;
-    text-shadow:none !important;
-  }
-
-  /* “Scorri per confermare...” molto piccolo come prima */
-  .hero .scroll-hint,
-  .scroll-hint{
-    font-size:.55rem !important;
-    font-weight:400 !important;
-    letter-spacing:.25em !important;
-    color:rgba(0,0,0,.75) !important;
-    bottom:1.2rem !important;
-    text-shadow:none !important;
-  }
-
-  .hero .scroll-hint::after,
-  .scroll-hint::after{
-    font-size:1rem !important;
-    color:var(--gold) !important;
-  }
-
-  /* Frase finale Cuccaro in grassetto su mobile */
   .cuccaro-text p.cuccaro-finale,
   p.cuccaro-finale,
   .cuccaro-finale{
@@ -2162,64 +1607,102 @@ p.cuccaro-finale,
     font-style:normal !important;
   }
 }
-</style>
 
+/* ─── GIFT CHOICE CARDS ─── */
+.gift-choice-card{
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+  touch-action:manipulation;
+}
+.gift-choice-card:active,
+.gift-choice-card.touching{
+  transform:scale(.96);
+  background:white;
+  border-color:var(--pea);
+  box-shadow:0 4px 14px rgba(74,106,40,.18);
+  transition:transform .08s ease;
+}
+@media(max-width:650px){
+  .gift-choice-grid{ grid-template-columns:1fr; }
+  .gift-choice-card{ padding:1.35rem 1rem; }
+  .gift-choice-emoji{ font-size:2.1rem; }
+  .gift-choice-name{ font-size:1.55rem; }
+  .gift-panel-close{ right:0; }
+}
 
-<style id="subhero-gradient-mobile-fix">
-/* ===== SFUMATURA MOBILE ALTA SUBHERO ===== */
+/* ─── PLACES DATE BREAK MOBILE ─── */
 @media(max-width:768px){
-  .split{
-    position:relative !important;
-    overflow:hidden !important;
-  }
-
-  .split::before{
-    display:block !important;
-    content:'' !important;
-    position:absolute !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    height:170px !important;
-    z-index:20 !important;
-    pointer-events:none !important;
-    background:linear-gradient(
-      to bottom,
-      #F5F0E8 0%,
-      rgba(245,240,232,.92) 24%,
-      rgba(245,240,232,.70) 50%,
-      rgba(245,240,232,.35) 75%,
-      rgba(245,240,232,0) 100%
-    ) !important;
-  }
+  .places-date-break { display: block; }
 }
+
+/* ─── IBAN CAUSALE ─── */
+.iban-causale span { color: #333 !important; }
+@media(max-width: 768px) {
+  .venue-text .venue-desc { font-size: 1.22rem !important; line-height: 1.85 !important; }
+  .tl-content p { font-size: 1rem !important; }
+  .nc-route { font-size: .95rem !important; }
+}
+
+/* ─── FORM SUBMIT TOUCH ─── */
+.form-submit { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
 </style>
 
 
-<style id="cuccaro-finale-only-fix">
-/* SOLO ultima frase sezione Cuccaro */
-.cuccaro-text p.cuccaro-finale,
-p.cuccaro-finale,
-.cuccaro-finale{
-  color:#132207 !important;
-  -webkit-text-fill-color:#132207 !important;
-  font-weight:900 !important;
-  opacity:1 !important;
-  font-style:normal !important;
-}
 
-@media(max-width:768px){
-  .cuccaro-text p.cuccaro-finale,
-  p.cuccaro-finale,
-  .cuccaro-finale{
-    color:#0b1802 !important;
-    -webkit-text-fill-color:#0b1802 !important;
-    font-weight:900 !important;
-    opacity:1 !important;
-    font-style:normal !important;
-  }
-}
-</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 <body>
@@ -2440,8 +1923,6 @@ p.cuccaro-finale,
     </div>
     <div class="film-gap"><span>KODAK • 400TX</span></div>
     </div>
-  </div>
-<div class="film-dot" onclick="goToFrame(1)"></div><div class="film-dot" onclick="goToFrame(2)"></div><div class="film-dot" onclick="goToFrame(3)"></div><div class="film-dot" onclick="goToFrame(4)"></div><div class="film-dot" onclick="goToFrame(5)"></div><div class="film-dot" onclick="goToFrame(6)"></div>
   </div>
 </section>
 
