@@ -2855,13 +2855,33 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     });
   });
 
-  // ─── MOUSE DRAG (desktop) ───
-  let isDown = false, startX = 0, startLeft = 0;
-
+  // ─── HELPER ───
   function getTranslateX() {
     const m = new DOMMatrix(getComputedStyle(track).transform);
     return m.m41;
   }
+  function wrapPos(pos) {
+    const half = track.scrollWidth / 2;
+    if (half <= 0) return pos;
+    let p = pos % half;
+    if (p > 0) p -= half;
+    return p;
+  }
+  function syncAndResume(pos) {
+    const half = track.scrollWidth / 2;
+    const wrapped = wrapPos(pos);
+    const progress = Math.abs(wrapped) / half;
+    track.style.transform = '';
+    track.style.animationDelay = `-${progress * 40}s`;
+    track.style.animation = 'none';
+    requestAnimationFrame(() => {
+      track.style.animation = 'filmScroll 40s linear infinite';
+      track.style.animationPlayState = 'running';
+    });
+  }
+
+  // ─── MOUSE DRAG (desktop) ───
+  let isDown = false, startX = 0, startLeft = 0;
 
   wrap.addEventListener('mousedown', e => {
     isDown = true;
@@ -2876,61 +2896,64 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     if (!isDown) return;
     isDown = false;
     wrap.style.cursor = 'grab';
-    // Sync animation position then resume
-    const cur = getTranslateX();
-    const half = track.scrollWidth / 2;
-    const progress = Math.abs(cur % half) / half;
-    track.style.animationDelay = `-${progress * 40}s`;
-    track.style.animation = 'none';
-    requestAnimationFrame(() => {
-      track.style.animation = 'filmScroll 40s linear infinite';
-      track.style.animationPlayState = 'running';
-    });
+    syncAndResume(getTranslateX());
   });
   document.addEventListener('mousemove', e => {
     if (!isDown) return;
     e.preventDefault();
     const dx = e.clientX - startX;
-    const half = track.scrollWidth / 2;
-    let newX = startLeft + dx;
-    if (newX > 0) newX = 0;
-    if (newX < -half) newX = -half;
-    track.style.transform = `translateX(${newX}px)`;
+    const pos = wrapPos(startLeft + dx);
+    track.style.transform = `translateX(${pos}px)`;
   });
 
   // ─── TOUCH (mobile) ───
-  let tStartX = 0, tStartLeft = 0, tLastX = 0, tLastTime = 0;
+  let tStartX = 0, tStartY = 0, tStartLeft = 0, tLastX = 0, tLastTime = 0;
   let velocity = 0, touchMoved = false, momentumRaf;
+  let scrollDir = null; // 'h' orizzontale | 'v' verticale | null non ancora deciso
 
   wrap.addEventListener('touchstart', e => {
     cancelAnimationFrame(momentumRaf);
-    track.style.animationPlayState = 'paused';
-    clearTimeout(resumeTimer);
     tStartX = e.touches[0].clientX;
+    tStartY = e.touches[0].clientY;
     tStartLeft = getTranslateX();
     tLastX = tStartX;
     tLastTime = Date.now();
     velocity = 0;
     touchMoved = false;
+    scrollDir = null;
   }, {passive: true});
 
   wrap.addEventListener('touchmove', e => {
     const now = Date.now();
     const x = e.touches[0].clientX;
+    const y = e.touches[0].clientY;
+    const dx = x - tStartX;
+    const dy = y - tStartY;
+
+    // Determina la direzione dominante al primo movimento significativo
+    if (scrollDir === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+      scrollDir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+      // Se orizzontale, ferma l'animazione e prendi il controllo
+      if (scrollDir === 'h') {
+        track.style.animationPlayState = 'paused';
+        clearTimeout(resumeTimer);
+      }
+    }
+
+    // Scroll verticale → lascia fare alla pagina
+    if (scrollDir === 'v') return;
+    if (scrollDir === null) return;
+
     const dt = now - tLastTime || 1;
     velocity = (x - tLastX) / dt;
     tLastX = x;
     tLastTime = now;
 
-    const dx = x - tStartX;
     if (Math.abs(dx) > 4) touchMoved = true;
     if (!touchMoved) return;
 
-    const half = track.scrollWidth / 2;
-    let newX = tStartLeft + dx;
-    if (newX > 0) newX = 0;
-    if (newX < -half) newX = -half;
-    track.style.transform = `translateX(${newX}px)`;
+    const pos = wrapPos(tStartLeft + dx);
+    track.style.transform = `translateX(${pos}px)`;
   }, {passive: true});
 
   wrap.addEventListener('touchend', e => {
@@ -2940,29 +2963,18 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
       if (frame) { openLightbox(frame); pause(4000); }
       return;
     }
-    // Momentum
+    // Momentum con wrap infinito
     let pos = getTranslateX();
     let vel = velocity * 16;
-    const half = track.scrollWidth / 2;
 
     function momentum() {
       vel *= 0.92;
-      pos += vel;
-      if (pos > 0) pos = 0;
-      if (pos < -half) pos = -half;
+      pos = wrapPos(pos + vel);
       track.style.transform = `translateX(${pos}px)`;
       if (Math.abs(vel) > 0.3) {
         momentumRaf = requestAnimationFrame(momentum);
       } else {
-        // Sync and resume
-        const progress = Math.abs(pos % half) / half;
-        track.style.transform = '';
-        track.style.animationDelay = `-${progress * 40}s`;
-        track.style.animation = 'none';
-        requestAnimationFrame(() => {
-          track.style.animation = 'filmScroll 40s linear infinite';
-          track.style.animationPlayState = 'running';
-        });
+        syncAndResume(pos);
       }
     }
     momentumRaf = requestAnimationFrame(momentum);
