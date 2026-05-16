@@ -343,7 +343,7 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
+  touch-action: none;
   scrollbar-width: none;
   cursor: grab;
 }
@@ -2658,7 +2658,7 @@ p.cuccaro-finale,
 
       <div class="form-group">
         <label class="form-label">Numero persone <span>*</span></label>
-        <input type="number" class="form-input" id="f_persone" min="1" max="10" placeholder="Es. 2" autocomplete="off" inputmode="numeric" required>
+        <input type="number" class="form-input" id="f_persone" min="0" max="10" placeholder="Es. 2" autocomplete="off" inputmode="numeric" required>
       </div>
 
       <div class="form-group">
@@ -3127,7 +3127,7 @@ function submitRsvp(e) {
   const intolleranze = document.getElementById('f_intolleranze').value.trim();
 
   const errEl = document.getElementById('formError');
-  if (!nome || !partecipa || !persone || !navetta) {
+  if (!nome || !partecipa || (persone === '' || persone === null) || !navetta) {
     errEl.style.display = 'block';
     errEl.scrollIntoView({behavior: 'smooth', block: 'center'});
     return;
