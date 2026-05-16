@@ -165,6 +165,15 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
   .split{display:block;min-height:auto;position:relative;background:var(--carta)}
   .split-photo{height:88vw;min-height:300px;max-height:420px;width:100%;position:relative}
   .split-photo img{object-position:center 45%;border-radius:0}
+  .split-photo::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:120px;
+    background:linear-gradient(to bottom,#F5F0E8 0%,rgba(245,240,232,.6) 40%,transparent 100%);
+    z-index:3;
+    pointer-events:none;
+  }
   .split-text{
     position:relative;
     background:white;
@@ -341,9 +350,8 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 .film-track-wrap {
   position: relative;
   overflow: hidden;
-  touch-action: pan-y;
+  touch-action: none;
   cursor: grab;
-  will-change: transform;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -1553,16 +1561,7 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .split-text::before{
     height:4rem !important;
   }
-  /* sfumatura foto → card bianca su mobile */
-  .split-photo::after{
-    content:'';
-    position:absolute;
-    bottom:0;left:0;right:0;
-    height:80px;
-    background:linear-gradient(to bottom,transparent 0%,white 100%);
-    z-index:3;
-    pointer-events:none;
-  }
+
 }
 
 /* ─── VENUE DESC ─── */
@@ -2528,9 +2527,11 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   // ─── TOUCH (mobile) ───
   let tStartX = 0, tStartY = 0, tStartLeft = 0, tLastX = 0, tLastTime = 0;
   let velocity = 0, touchMoved = false, momentumRaf;
-  let scrollDir = null; // 'h' orizzontale | 'v' verticale | null non ancora deciso
+  let scrollDir = null;
+  let isTouchingWrap = false;
 
   wrap.addEventListener('touchstart', e => {
+    isTouchingWrap = true;
     cancelAnimationFrame(momentumRaf);
     tStartX = e.touches[0].clientX;
     tStartY = e.touches[0].clientY;
@@ -2542,52 +2543,16 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     scrollDir = null;
   }, {passive: true});
 
-  wrap.addEventListener('touchmove', e => {
-    const now = Date.now();
-    const x = e.touches[0].clientX;
-    const y = e.touches[0].clientY;
-    const dx = x - tStartX;
-    const dy = y - tStartY;
-
-    // Determina la direzione al primo movimento significativo
-    if (scrollDir === null && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
-      scrollDir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
-      if (scrollDir === 'h') {
-        track.style.animationPlayState = 'paused';
-        clearTimeout(resumeTimer);
-      }
-    }
-
-    // Verticale o non ancora deciso → lascia scorrere la pagina
-    if (scrollDir !== 'h') return;
-
-    // Orizzontale → blocca scroll pagina e muovi rullino
-    try { e.preventDefault(); } catch(err) {}
-
-    const dt = now - tLastTime || 1;
-    velocity = (x - tLastX) / dt;
-    tLastX = x;
-    tLastTime = now;
-
-    if (Math.abs(dx) > 3) touchMoved = true;
-    if (!touchMoved) return;
-
-    const pos = wrapPos(tStartLeft + dx);
-    track.style.transform = `translateX(${pos}px)`;
-  }, {passive: false});
-
   wrap.addEventListener('touchend', e => {
-    if (scrollDir === 'v') return; // era scroll verticale, non fare nulla
+    isTouchingWrap = false;
+    if (scrollDir === 'v') return;
     if (!touchMoved) {
-      // Tap → open lightbox
       const frame = e.target.closest('.film-frame');
       if (frame) { openLightbox(frame); pause(4000); }
       return;
     }
-    // Momentum con wrap infinito
     let pos = getTranslateX();
     let vel = velocity * 16;
-
     function momentum() {
       vel *= 0.92;
       pos = wrapPos(pos + vel);
@@ -2600,6 +2565,48 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     }
     momentumRaf = requestAnimationFrame(momentum);
   }, {passive: true});
+
+  wrap.addEventListener('touchcancel', () => {
+    isTouchingWrap = false;
+    scrollDir = null;
+  }, {passive: true});
+
+  // Listener sul documento: intercetta i touchmove solo quando il dito è sul rullino
+  // Questo bypassa il blocco di touch-action perché viene da document, non dall'elemento
+  document.addEventListener('touchmove', e => {
+    if (!isTouchingWrap) return;
+
+    const x = e.touches[0].clientX;
+    const y = e.touches[0].clientY;
+    const dx = x - tStartX;
+    const dy = y - tStartY;
+
+    // Determina direzione al primo movimento significativo
+    if (scrollDir === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+      scrollDir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+      if (scrollDir === 'h') {
+        track.style.animationPlayState = 'paused';
+        clearTimeout(resumeTimer);
+      }
+    }
+
+    if (scrollDir === 'v' || scrollDir === null) return; // scroll verticale libero
+
+    // Orizzontale: blocca scroll pagina e muovi rullino
+    e.preventDefault();
+
+    const now = Date.now();
+    const dt = now - tLastTime || 1;
+    velocity = (x - tLastX) / dt;
+    tLastX = x;
+    tLastTime = now;
+
+    if (Math.abs(dx) > 3) touchMoved = true;
+    if (!touchMoved) return;
+
+    const pos = wrapPos(tStartLeft + dx);
+    track.style.transform = `translateX(${pos}px)`;
+  }, {passive: false});
 })();
 
 // ─── CUCCARO HOVER ───
