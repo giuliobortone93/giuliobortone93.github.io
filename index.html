@@ -341,8 +341,13 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 .film-track-wrap {
   position: relative;
   overflow: hidden;
+  -webkit-overflow-scrolling: auto;
   touch-action: none;
   cursor: grab;
+  /* force layer for smooth touch */
+  will-change: transform;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .film-track-wrap::-webkit-scrollbar { display: none; }
 .film-track-wrap:active { cursor: grabbing; }
@@ -1528,6 +1533,15 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
 }
 
 /* ─── SUBHERO (split section) ─── */
+.split-text::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:6rem;
+  background:linear-gradient(to bottom,rgba(245,240,232,1) 0%,rgba(245,240,232,.7) 50%,transparent 100%);
+  pointer-events:none;
+  z-index:2;
+}
 @media(max-width:768px){
   .split,
   .split-photo,
@@ -1609,10 +1623,125 @@ p.cuccaro-finale,
 }
 
 /* ─── GIFT CHOICE CARDS ─── */
+.gift-choice-area{
+  max-width:760px;
+  margin:0 auto;
+  padding:0 1rem;
+}
+.gift-choice-title-small{
+  font-family:'Jost',sans-serif;
+  font-size:.72rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--pea);
+  margin-bottom:1.4rem;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+}
+.gift-choice-title-small::before{content:'✦';font-size:.55rem;opacity:.7}
+.gift-choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.1rem;
+  margin-bottom:1.8rem;
+}
 .gift-choice-card{
+  position:relative;
+  border:1.5px solid rgba(122,154,74,.35);
+  background:rgba(122,154,74,.055);
+  border-radius:22px;
+  padding:1.7rem 1rem 1.5rem;
+  cursor:pointer;
+  color:var(--pea-dark);
+  font-family:'Jost',sans-serif;
+  text-align:center;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
   user-select:none;
-  touch-action:manipulation;
+}
+.gift-choice-card:hover{
+  transform:translateY(-4px);
+  background:white;
+  border-color:var(--pea);
+  box-shadow:0 12px 32px rgba(74,106,40,.13);
+}
+.gift-choice-emoji{
+  display:block;
+  font-size:2.5rem;
+  margin-bottom:.65rem;
+}
+.gift-choice-name{
+  display:block;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.75rem;
+  line-height:1;
+  font-weight:600;
+  color:var(--pea-dark);
+}
+.gift-choice-desc{
+  display:block;
+  margin-top:.55rem;
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(74,106,40,.65);
+}
+.gift-iban-panel{
+  display:none;
+  position:relative;
+  margin:2rem auto 0;
+  max-width:720px;
+  animation:giftPanelIn .22s ease both;
+}
+.gift-iban-panel.open{ display:block; }
+@keyframes giftPanelIn{
+  from{opacity:0;transform:translateY(18px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.gift-panel-close{
+  position:absolute;
+  top:-14px;
+  right:-8px;
+  z-index:4;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid rgba(122,154,74,.35);
+  background:white;
+  color:var(--pea-dark);
+  font-size:1.45rem;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+.gift-panel-choice{
+  font-family:'Jost',sans-serif;
+  font-size:.72rem;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--pea);
+  margin-bottom:.8rem;
+}
+.gift-iban-box{ margin-bottom:0 !important; }
+.gift-holder{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;
+  color:var(--pea-dark);
+  margin-bottom:1.1rem;
+}
+.iban-label-spaced{ margin-top:1.1rem; }
+
+.gift-choice-card:active,
+.gift-choice-card.touching{
+  transform:scale(.96);
+  background:white;
+  border-color:var(--pea);
+  box-shadow:0 4px 14px rgba(74,106,40,.18);
+  transition:transform .08s ease;
 }
 .gift-choice-card:active,
 .gift-choice-card.touching{
