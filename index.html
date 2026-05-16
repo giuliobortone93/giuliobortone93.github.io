@@ -357,6 +357,18 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 }
 .film-track-wrap::-webkit-scrollbar { display: none; }
 .film-track-wrap:active { cursor: grabbing; }
+/* Mobile: native scroll */
+@media(max-width: 768px) {
+  .film-track-wrap {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: none;
+    cursor: default;
+  }
+  .film-track-wrap::-webkit-scrollbar { display: none; }
+}
 /* fade edges */
 .film-track-wrap::before,
 .film-track-wrap::after {
@@ -2524,7 +2536,15 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     track.style.transform = `translateX(${pos}px)`;
   });
 
-  // ─── TOUCH (mobile) ───
+  // ─── TOUCH (mobile) ─── skip on mobile (uses native CSS scroll)
+  const isMobileDevice = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 900);
+  if (isMobileDevice) {
+    // On mobile: stop the CSS animation, let native scroll handle it
+    track.style.animation = 'none';
+    track.style.transform = '';
+    return; // exit the filmstrip JS entirely on mobile
+  }
+
   let tStartX = 0, tStartY = 0, tStartLeft = 0, tLastX = 0, tLastTime = 0;
   let velocity = 0, touchMoved = false, momentumRaf;
   let scrollDir = null;
