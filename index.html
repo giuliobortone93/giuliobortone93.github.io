@@ -341,10 +341,8 @@ footer .foot-date{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase
 .film-track-wrap {
   position: relative;
   overflow: hidden;
-  -webkit-overflow-scrolling: auto;
-  touch-action: none;
+  touch-action: pan-y;
   cursor: grab;
-  /* force layer for smooth touch */
   will-change: transform;
   -webkit-user-select: none;
   user-select: none;
@@ -1555,6 +1553,16 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   .split-text::before{
     height:4rem !important;
   }
+  /* sfumatura foto → card bianca su mobile */
+  .split-photo::after{
+    content:'';
+    position:absolute;
+    bottom:0;left:0;right:0;
+    height:80px;
+    background:linear-gradient(to bottom,transparent 0%,white 100%);
+    z-index:3;
+    pointer-events:none;
+  }
 }
 
 /* ─── VENUE DESC ─── */
@@ -2542,8 +2550,8 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     const dy = y - tStartY;
 
     // Determina la direzione al primo movimento significativo
-    if (scrollDir === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
-      scrollDir = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+    if (scrollDir === null && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
+      scrollDir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
       if (scrollDir === 'h') {
         track.style.animationPlayState = 'paused';
         clearTimeout(resumeTimer);
@@ -2554,7 +2562,7 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     if (scrollDir !== 'h') return;
 
     // Orizzontale → blocca scroll pagina e muovi rullino
-    e.preventDefault();
+    try { e.preventDefault(); } catch(err) {}
 
     const dt = now - tLastTime || 1;
     velocity = (x - tLastX) / dt;
