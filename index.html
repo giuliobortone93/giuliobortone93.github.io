@@ -1498,6 +1498,10 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   display: none;
 }
 
+
+@media(max-width:768px){
+  .places-date-break { display: block; }
+}
 </style>
 
 <style>
@@ -1529,13 +1533,24 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   cursor:pointer;
   color:var(--pea-dark);
   font-family:'Jost',sans-serif;
-  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
 }
 .gift-choice-card:hover{
   transform:translateY(-4px);
   background:white;
   border-color:var(--pea);
   box-shadow:0 12px 32px rgba(74,106,40,.13);
+}
+.gift-choice-card:active,
+.gift-choice-card.touching{
+  transform:scale(.96);
+  background:white;
+  border-color:var(--pea);
+  box-shadow:0 4px 14px rgba(74,106,40,.18);
+  transition:transform .08s ease;
 }
 .gift-choice-emoji{
   display:block;
@@ -1563,14 +1578,14 @@ footer .foot-date { color: rgba(245,240,232,.5) !important; }
   position:relative;
   margin:2rem auto 0;
   max-width:720px;
-  animation:giftPanelIn .35s ease both;
+  animation:giftPanelIn .22s ease both;
 }
 .gift-iban-panel.open{
   display:block;
 }
 @keyframes giftPanelIn{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:translateY(0)}
+  from{opacity:0;transform:translateY(18px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
 .gift-panel-close{
   position:absolute;
@@ -2434,7 +2449,7 @@ p.cuccaro-finale,
   <div class="reveal">
     <p class="tag-line">I nostri luoghi</p>
     <h2 class="section-h">Dove ci sposiamo</h2>
-    <p class="section-sub">Cerimonia &amp; Ricevimento · 12 Settembre 2026</p>
+    <p class="section-sub">Cerimonia &amp; Ricevimento · <span class="places-date-break">12 Settembre 2026</span></p>
   </div>
 
   <!-- CERIMONIA -->
@@ -3063,7 +3078,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   updateSplash();
   const splashTick = setInterval(updateSplash, 1000);
 
-  // Hide after 8 seconds
+  // Hide after 6 seconds
   setTimeout(() => {
     splash.classList.add('fade-out');
     document.body.style.overflow = '';
@@ -3071,7 +3086,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       splash.classList.add('hidden');
       clearInterval(splashTick);
     }, 1200);
-  }, 6000);
+  }, 4000);
 
   // Block scroll while splash is visible
   document.body.style.overflow = 'hidden';
@@ -3147,7 +3162,10 @@ function openGiftPanel(choice){
 
   panel.classList.add('open');
   panel.setAttribute('aria-hidden', 'false');
-  panel.scrollIntoView({behavior:'smooth', block:'center'});
+  const isMobile = window.innerWidth <= 768;
+  requestAnimationFrame(() => {
+    panel.scrollIntoView({behavior: isMobile ? 'auto' : 'smooth', block:'nearest'});
+  });
 }
 
 function closeGiftPanel(){
@@ -3187,5 +3205,18 @@ function copyGiftIBAN(btn){
 }
 </script>
 
+
+<script>
+// Migliora reattività touch su mobile per le gift card
+document.querySelectorAll('.gift-choice-card').forEach(function(card){
+  card.addEventListener('touchstart', function(e){
+    // Feedback visivo immediato
+    card.classList.add('touching');
+  }, {passive: true});
+  card.addEventListener('touchend', function(e){
+    card.classList.remove('touching');
+  }, {passive: true});
+});
+</script>
 </body>
 </html>
