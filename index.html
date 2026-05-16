@@ -2543,12 +2543,46 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     track.style.transform = `translateX(${pos}px)`;
   });
 
-  // ─── TOUCH (mobile) ─── scroll nativo CSS, JS solo desktop
+  // ─── MOBILE: scroll nativo + auto-scroll JS ───
   const isMobileDevice = window.innerWidth <= 768;
   if (isMobileDevice) {
-    // ferma animazione CSS, scroll nativo gestisce tutto
     track.style.animation = 'none';
     track.style.transform = 'none';
+
+    // Duplica il contenuto per loop infinito
+    const clone = track.cloneNode(true);
+    track.parentElement.appendChild(clone);
+
+    let userTouching = false;
+    let autoPos = 0;
+    const speed = 0.5;
+
+    function mobileAutoScroll() {
+      if (!userTouching) {
+        autoPos += speed;
+        const half = wrap.scrollWidth / 2;
+        if (autoPos >= half) autoPos = 0;
+        wrap.scrollLeft = autoPos;
+      }
+      requestAnimationFrame(mobileAutoScroll);
+    }
+
+    wrap.addEventListener('touchstart', () => {
+      userTouching = true;
+      autoPos = wrap.scrollLeft;
+    }, {passive: true});
+
+    wrap.addEventListener('touchend', () => {
+      autoPos = wrap.scrollLeft;
+      setTimeout(() => { userTouching = false; }, 2000);
+    }, {passive: true});
+
+    wrap.addEventListener('touchcancel', () => {
+      autoPos = wrap.scrollLeft;
+      setTimeout(() => { userTouching = false; }, 2000);
+    }, {passive: true});
+
+    mobileAutoScroll();
     return;
   }
 
